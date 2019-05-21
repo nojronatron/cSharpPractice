@@ -10,9 +10,11 @@ namespace Exercise_BoxObject
     {
         static void Main(string[] args)
         {
+            // Create two box instances
             Box defaultBox = new Box();
             Box customBox = new Box(2, 3, 4);
 
+            // Calling the Display Methods, once for each Object instance
             Display(defaultBox);
             Console.WriteLine();
             Display(customBox);
@@ -24,7 +26,7 @@ namespace Exercise_BoxObject
 
         static void Display(Box b)
         {
-            // Display the box Length, Width, Height, and Volume
+            // Method to display the box Length, Width, Height, and Volume
             Console.WriteLine($"Box {b} Length: {b.Length}; Width: {b.Width}; Height: {b.Height}.");
             Console.WriteLine($"Box Volume is {b.GetVolume()}");
         }
