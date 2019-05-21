@@ -8,7 +8,7 @@ namespace StringBuilding
 {
     class Program
     {
-        static void FunWithStringBuilder()
+        static void Main(string[] args)
         {
             Console.WriteLine("***** Using the StringBuilder *****");
             StringBuilder sb = new StringBuilder("***** Fantastic Games *****");
@@ -22,6 +22,9 @@ namespace StringBuilding
             Console.WriteLine(sb.ToString());
             Console.WriteLine("sb has {0} chars.", sb.Length);
             Console.WriteLine();
+
+            // pause program execution before exiting
+            Console.ReadLine();
         }
     }
 }
