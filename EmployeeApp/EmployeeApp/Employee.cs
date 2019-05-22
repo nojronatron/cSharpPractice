@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace EmployeeApp
 {
-    class Employee
-    {
+    partial class Employee
+    {  //  All partial class files MUST have keyword partial in their class definition and be in the same Namespace
         // Field data
-        private string empName;
-        private int empID;
-        private float currPay;
-        private int empAge;
 
         // Properties:
         // Accessor (get method) and Mutator (set method) are complex when business logic needs to be computed
@@ -37,21 +33,9 @@ namespace EmployeeApp
                     empID = value; } }
         public float Pay { get { return currPay; } set { currPay = value; } }
         // Property as Expression-Bodied Member:
-        public int Age { get => empAge; set => empAge = value; }  // Fewer characters, much cleaner, still readable
+        public int Age { get => empAge; set => empAge = value; }  // Fewer characters, much cleaner, still readable, NOT useful if Logic is needed
 
         // Constructors
-        public Employee() { }
-        public Employee(string name, int id, float pay) : this(name, 0, id, pay) { } // Constructor Chaining
-        public Employee(string name, int age, int id, float pay)
-        {
-            // Master Constructor
-            // Business logic could exist here as well as in the Properties but that duplicates code and adds work
-            // Instead USE PROPERTIES in the Constructor so the business login in the Properties is executed every time!
-            Name = name;
-            Age = age;
-            ID = id;
-            Pay = pay;
-        }
 
         // Methods
         public void GiveBonus(float amount)
