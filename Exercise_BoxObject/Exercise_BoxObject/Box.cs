@@ -9,7 +9,7 @@ namespace Exercise_BoxObject
     public class Box
     {
         // private Fields: Length, Width, Height
-        private int length;
+        private int length; // int allows for up to 4 million values
         private int width;
         private int height;
 
