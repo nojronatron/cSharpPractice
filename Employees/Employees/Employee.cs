@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Employees
 {
-    partial class Employee
+    abstract partial class Employee
     {  //  All partial class files MUST have keyword partial in their class definition and be in the same Namespace
        // Field data
 

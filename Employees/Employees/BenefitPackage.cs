@@ -8,6 +8,13 @@ namespace Employees
 {
     class BenefitPackage
     {
+        // nested object
+        private enum BenefitPackageLevel
+        {
+            Standard,
+            Gold,
+            Platinum
+        }
         // assume other members here
         public double ComputePayDeduction()
         {

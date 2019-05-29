@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Employees
 {
-    partial class Employee
+    abstract partial class Employee
     {  // All Partial Class files MUST include keyword partial in their class definition and be in the same Namespace
         // Field Data
         private string empName; // using keyword 'protected', these Fields could be directly accessed by derived Classes

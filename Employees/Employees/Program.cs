@@ -52,7 +52,13 @@ namespace Employees
             SalesPerson fran = new SalesPerson("Fran", 43, 93, 3000, "932-32-3232", 31);
             fran.GiveBonus(200);
             fran.DisplayStats();
+            Console.WriteLine();
 
+            // the need for an abstract class:
+            // Employee emmy = new Employee("Emma", 34, 239, 47_000, "324-23-3434");
+            // emmy.DisplayStats();
+            // to avoid allowing instantiation of an employee with no assignment/job classification
+            // MUST remove keyword abstract from the Employee Class
 
             // pause program executions before exit
             Console.ReadLine();

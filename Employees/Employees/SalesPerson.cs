@@ -20,8 +20,8 @@ namespace Employees
         }
         public SalesPerson() { } // a default CTOR is needed when a Custom CTOR is added
 
-        public override void GiveBonus(float amount) // overrides virtual member in parent class Employee
-        {
+        public override sealed void GiveBonus(float amount) // overrides virtual member in parent class Employee
+        { // Methods() can be sealed also; this Method() is sealed so that PTSalesPerson.SalesPerson.Employee cannot get a bonus
             int salesBonus = 0;
             if (SalesNumber >= 0 && SalesNumber <= 100) salesBonus = 10;
             else
