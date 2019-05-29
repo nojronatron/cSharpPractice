@@ -9,8 +9,8 @@ namespace Employees
     partial class Employee
     {  // All Partial Class files MUST include keyword partial in their class definition and be in the same Namespace
         // Field Data
-        private string empName;
-        private int empID;
+        private string empName; // using keyword 'protected', these Fields could be directly accessed by derived Classes
+        private int empID;      // protected Fields can break encapsulation BUT protected methods are legal (and book says useful)
         private float currPay;
         private int empAge;
         private string empSSN = ""; // note default value assignment

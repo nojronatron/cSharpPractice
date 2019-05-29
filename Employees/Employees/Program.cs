@@ -19,15 +19,29 @@ namespace Employees
                 SalesNumber = 50
             };
 
-            Manager chucky = new Manager("Chucky", 50, 92, 100000, "333-23-2322", 9000);
+            // Nested Type Definitions
+            // Create and use the public inner class
+            // example: Employee.BenefitPackage.BenefitPackageLevel.Platinum;
 
+            Manager chucky = new Manager("Chucky", 50, 92, 100000, "333-23-2322", 9000);
+            double cost = chucky.GetBenefitCost(); // calling the BenefitPackage, a class instance within the employee class with its own property
+
+            PTSalesPerson pauly = new PTSalesPerson("Paul", 22, 298, 28_000, "444-99-4990", 1, "Fred");
+            // "Paul", 22, 298, 28_000, "444-99-4990", 1, "Fred" or "Chucky"
 
             // display how things are going
-            Console.WriteLine($"SalesPerson Info: {fred.GetName()}:");
+            Console.WriteLine($"\nSalesPerson *** {fred.GetName()} ***");
             fred.DisplayStats();
 
-            Console.WriteLine($"/nManager Info: {chucky.GetName()}:");
+            Console.WriteLine($"\nManager *** {chucky.GetName()} ***");
+
             chucky.DisplayStats();
+
+            Console.WriteLine($"\nPartTime SalesPerson *** {pauly.GetName()} ***");
+            pauly.DisplayStats();
+            Console.Write($"{pauly.GetName()} reports to:");
+            Console.Write(pauly.ManagerName());
+            
 
             // pause program executions before exit
             Console.ReadLine();

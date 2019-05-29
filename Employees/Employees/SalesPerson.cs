@@ -15,7 +15,7 @@ namespace Employees
         public SalesPerson(string fullName, int age, int empID, float currPay, string ssn, int numbOfSales) :base(fullName, age, empID, currPay, ssn)
         {
             // This property belongs to SalesPerson class
-            SalesNumber = numbOfSales;
+            this.SalesNumber = numbOfSales;
         }
         public SalesPerson() { } // a default CTOR is needed when a Custom CTOR is added
 

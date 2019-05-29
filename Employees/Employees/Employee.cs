@@ -43,6 +43,21 @@ namespace Employees
             Console.WriteLine($"Age: {Age}");
             Console.WriteLine($"Pay: {Pay}");
         }
+        // Contain a BenefitsPackage object
+        protected BenefitPackage empBenefits = new BenefitPackage(); //  has-a => containment/delegation model, or aggregation
+        // Also see Nested.Type.Definitions; classes within classes => walk class namespaces to access within nested class scopes
+
+        // expose certain benefit behaviors of an object
+        public double GetBenefitCost() // a Method()...
+        {
+            return empBenefits.ComputePayDeduction();
+        }
+        // expose object through a custom property
+        public BenefitPackage Benefits // an Accessor/Mutator
+        {
+            get { return empBenefits; }
+            set { empBenefits = value; }
+        }
 
     }
 }
