@@ -40,8 +40,19 @@ namespace Employees
             Console.WriteLine($"\nPartTime SalesPerson *** {pauly.GetName()} ***");
             pauly.DisplayStats();
             Console.Write($"{pauly.GetName()} reports to:");
-            Console.Write(pauly.ManagerName());
-            
+            Console.Write($"{pauly.ManagerName()}\n\n");
+
+            // give a bonus
+            float bonusAmt = 2_500;
+            chucky.GiveBonus(bonusAmt);
+            Console.WriteLine("{0} got a bonus of {1:c}!", chucky.Name, bonusAmt);
+            chucky.DisplayStats();
+            Console.WriteLine();
+
+            SalesPerson fran = new SalesPerson("Fran", 43, 93, 3000, "932-32-3232", 31);
+            fran.GiveBonus(200);
+            fran.DisplayStats();
+
 
             // pause program executions before exit
             Console.ReadLine();

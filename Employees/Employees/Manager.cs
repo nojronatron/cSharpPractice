@@ -24,5 +24,16 @@ namespace Employees
         }
         public Manager() { } // default CTOR still needed when Custom CTOR added to the class
 
+        public override void GiveBonus(float amount) // overrides Employee.GiveBonus
+        {
+            base.GiveBonus(amount);
+            Random r = new Random();
+            StockOptions += r.Next(500);
+        }
+        public override void DisplayStats() // overrides Employee.DisplayStats
+        {
+            base.DisplayStats();
+            Console.WriteLine($"Stock Options: {StockOptions}");
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Employees
         // Constructors
 
         // Methods
-        public void GiveBonus(float amount)
+        public virtual void GiveBonus(float amount) // virtual allows a sub class to override the method
         {
             Pay += amount;  // reference the PROPERTY here also
         }
@@ -35,13 +35,14 @@ namespace Employees
             if (name.Length > 15) { Console.WriteLine("Error! Name must be less than 15 characters!"); }
             else empName = name;
         }
-        public void DisplayStats()
+        public virtual void DisplayStats() // override enabled so sub classes can customize
         {
             // No: Console.WriteLine($"Name: {empName}"); Reference the PROPERTY instead
             Console.WriteLine($"Name: {Name}");
             Console.WriteLine($"ID: {ID}");
             Console.WriteLine($"Age: {Age}");
             Console.WriteLine($"Pay: {Pay}");
+            Console.WriteLine($"SSN: {SocialSecurityNumber}");
         }
         // Contain a BenefitsPackage object
         protected BenefitPackage empBenefits = new BenefitPackage(); //  has-a => containment/delegation model, or aggregation
