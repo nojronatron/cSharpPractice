@@ -10,35 +10,112 @@ namespace BankAccountExercise_22May19
     {
         static void Main(string[] args)
         {
-            // TODO: Rewrite console interface as a menu system
-            Console.WriteLine("***** Exercise: Accounts *****");
-            Console.WriteLine();
+            Console.WriteLine("***** Accounts Exercise *****");
 
-            Account one = new Account(100000000, 1000);
-            one.Deposit(1000);
-            //Console.WriteLine($"Account one\nAccount Number: {one.AccountNumber}\nBalance: {one.Balance}\n");
-            one.DisplayStats();
+            // Gather initial balances from user input
+            Console.Write("Enter beginning deposit for Account #1000-10000: ");
+            long.TryParse(Console.ReadLine(), out long amt); // .TryParse declares the variable and emits a value via keyword OUT
+            Account one = new Account(100000000, amt);
+            Console.Write("Enter beginning deposit for Account #2000-20000: ");
+            amt = long.Parse(Console.ReadLine()); // long.amt already exists so just overwrite the value
+            Account two = new Account(200000000, amt);
 
-            Account two = new Account(200000000, 2000);
-            two.Withdrawl(1999);
-            // Console.WriteLine($"Account two\nAccount Number: {two.AccountNumber}\nBalance: {two.Balance}\n");
-            two.DisplayStats();
+            // Create a menu system UI
+            while (true)
+            {
+                try
+                {
+                    // Console.Clear();
+                    Console.WriteLine("      *** Main Menu ***\n");
+                    Console.WriteLine(" 1) Deposit to account ONE");
+                    Console.WriteLine(" 2) Deposit to account TWO");
+                    Console.WriteLine(" 3) Withdrawl from account ONE");
+                    Console.WriteLine(" 4) Withdrawl from account TWO");
+                    Console.WriteLine(" 5) Display Accounts");
+                    Console.WriteLine(" 6) Transfer from account ONE to account TWO");
+                    Console.WriteLine(" 7) Transfer from account TWO to account ONE");
+                    Console.WriteLine(" 8) Exit Program\n");
+                    Console.Write(" ===> Your selection ===> ");
 
-            Console.WriteLine("\nTransferring {0:C} from {1} to {2}...\n", 1, one.AccountNumber, two.AccountNumber);
-            TransferFunds(one, two, 1);
+                    int menuSelection = int.Parse(Console.ReadLine());
+                    long amount = 0;
 
-            one.DisplayStats();
-            two.DisplayStats();
-
-            Console.ReadLine();
+                    if (menuSelection == 1) // had to settle for if statements until I get the hang of the switch statement (type errors)
+                    {
+                        Console.WriteLine("Enter deposit amount to account ONE: ");
+                        amount = long.Parse(Console.ReadLine());
+                        one.Deposit(amount);
+                    }
+                    else if (menuSelection == 2)
+                    {// Deposit to account
+                        Console.WriteLine("Enter deposit amount to account TWO: ");
+                        amount = long.Parse(Console.ReadLine());
+                        two.Deposit(amount);
+                    }
+                    else if (menuSelection == 3)
+                    {
+                        // Withdrawl from account
+                        Console.WriteLine("Enter amount to withdraw from account ONE: ");
+                        amount = long.Parse(Console.ReadLine());
+                        one.Withdrawl(amount);
+                    }
+                    else if (menuSelection == 4)
+                    {
+                        // Withdrawl from account
+                        Console.WriteLine("Enter amount to withdraw from account TWO: ");
+                        amount = long.Parse(Console.ReadLine());
+                        two.Withdrawl(amount);
+                    }
+                    else if (menuSelection == 5)
+                    {
+                        // Display accounts
+                        one.DisplayStats();
+                        two.DisplayStats();
+                    }
+                    else if (menuSelection == 6)
+                    {
+                        // transfer funds
+                        Console.WriteLine("\nEnter the amount to transfer from account ONE to account TWO: ");
+                        amount = long.Parse(Console.ReadLine());
+                        Console.WriteLine("\nTransferring {0:C} from {1} to {2}...\n", amount, one.AccountNumber, two.AccountNumber);
+                        TransferFunds(one, two, amount);
+                        one.DisplayStats();
+                        two.DisplayStats();
+                    }
+                    else if (menuSelection == 7)
+                    {
+                        // transfer funds
+                        Console.WriteLine("\nEnter the amount to transfer from account TWO to account ONE: ");
+                        amount = long.Parse(Console.ReadLine());
+                        Console.WriteLine("\nTransferring {0:C} from {1} to {2}...\n", amount, two.AccountNumber, one.AccountNumber);
+                        TransferFunds(two, one, amount);
+                        one.DisplayStats();
+                        two.DisplayStats();
+                    }
+                    else
+                    {
+                        // exit program
+                        Console.WriteLine("Press Enter Key to Exit. . .");
+                        _ = Console.Read();
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error! Invalid input!");
+                    Console.WriteLine($"{ex}");
+                    // _ = Console.Read();
+                }
+                Console.WriteLine("\nPress Enter To Continue. . .");
+                // _ = Console.Read();
+            } // end WHILE loop
         }
         static void TransferFunds(Account acctFrom, Account acctTo, long Amount)
         {
             // transfer allowed if acctFrom.balance is ge Amount
             if (Amount >= acctFrom.Balance)
             {
-                Console.WriteLine($"Error! Unable to withdrawl {Amount} from " +
-                $"{acctFrom.AccountNumber} with balance of {acctFrom.Balance}.");
+                Console.WriteLine($"Error! Unable to withdrawl {Amount} from {acctFrom.AccountNumber} with balance of {acctFrom.Balance}.");
             }
             else
             {
