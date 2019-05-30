@@ -8,15 +8,19 @@ namespace BankAccountExercise_22May19
 {
     class Account
     {
-        // private long accountNumber;
-        // private long balance;
+        private long accountNumber;
+        private long balance;
         public Account(long acctNumber, long initialBalance)
         {
             AccountNumber = acctNumber;
             Balance = initialBalance;
         }
         public Account() { }
-        public long AccountNumber { get; set; }
+        public long AccountNumber
+        {
+            get { return this.accountNumber; }
+            set { this.accountNumber = value; }
+        }
         public long Balance { get; set; }
         public void Withdrawl(long amount)
         {
@@ -29,11 +33,12 @@ namespace BankAccountExercise_22May19
             // adds amount to balance
             Balance += amount;
         }
-        public void DisplayStats()
-        {
-            Console.WriteLine("\n** Account Info ***");
-            Console.WriteLine($"Account Number: {AccountNumber}");
-            Console.WriteLine($"Account Balance: {Balance:C}\n");
-        }
+        // public void DisplayStats()
+        // {
+            // TODO: THis is not good design because the output should be data not UI; that is up to the user of the Class
+            // Console.WriteLine("\n** Account Info ***");
+            // Console.WriteLine($"Account Number: {AccountNumber}");
+            // Console.WriteLine($"Account Balance: {Balance:C}\n");
+        // }
     }
 }

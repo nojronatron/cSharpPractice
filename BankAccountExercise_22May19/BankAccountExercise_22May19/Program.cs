@@ -25,7 +25,7 @@ namespace BankAccountExercise_22May19
             {
                 try
                 {
-                    // Console.Clear();
+                    Console.Clear();
                     Console.WriteLine("      *** Main Menu ***\n");
                     Console.WriteLine(" 1) Deposit to account ONE");
                     Console.WriteLine(" 2) Deposit to account TWO");
@@ -69,8 +69,11 @@ namespace BankAccountExercise_22May19
                     else if (menuSelection == 5)
                     {
                         // Display accounts
-                        one.DisplayStats();
-                        two.DisplayStats();
+                        // one.DisplayStats();
+                        // two.DisplayStats();
+                        // Console.WriteLine($"Account ONE account number: {one.AccountNumber}; Balance: {one.Balance}");
+                        // Console.WriteLine($"Account TWO account number: {two.AccountNumber}; Balance: {two.Balance}");
+                        ShowAccountDetails();
                     }
                     else if (menuSelection == 6)
                     {
@@ -79,8 +82,9 @@ namespace BankAccountExercise_22May19
                         amount = long.Parse(Console.ReadLine());
                         Console.WriteLine("\nTransferring {0:C} from {1} to {2}...\n", amount, one.AccountNumber, two.AccountNumber);
                         TransferFunds(one, two, amount);
-                        one.DisplayStats();
-                        two.DisplayStats();
+                        // one.DisplayStats();
+                        // two.DisplayStats();
+                        ShowAccountDetails();
                     }
                     else if (menuSelection == 7)
                     {
@@ -89,8 +93,9 @@ namespace BankAccountExercise_22May19
                         amount = long.Parse(Console.ReadLine());
                         Console.WriteLine("\nTransferring {0:C} from {1} to {2}...\n", amount, two.AccountNumber, one.AccountNumber);
                         TransferFunds(two, one, amount);
-                        one.DisplayStats();
-                        two.DisplayStats();
+                        // one.DisplayStats();
+                        // two.DisplayStats();
+                        ShowAccountDetails();
                     }
                     else
                     {
@@ -99,6 +104,8 @@ namespace BankAccountExercise_22May19
                         _ = Console.Read();
                         return;
                     }
+                    Console.Write("\n\nPress Enter To Continue. . .");
+                    Console.Read();
                 }
                 catch (Exception ex)
                 {
@@ -112,8 +119,8 @@ namespace BankAccountExercise_22May19
         }
         static void TransferFunds(Account acctFrom, Account acctTo, long Amount)
         {
-            // transfer allowed if acctFrom.balance is ge Amount
-            if (Amount >= acctFrom.Balance)
+            // transfer allowed only if acctFrom.balance is gt Amount
+            if (acctFrom.Balance > Amount)
             {
                 Console.WriteLine($"Error! Unable to withdrawl {Amount} from {acctFrom.AccountNumber} with balance of {acctFrom.Balance}.");
             }
@@ -122,6 +129,11 @@ namespace BankAccountExercise_22May19
                 acctFrom.Withdrawl(Amount);
                 acctTo.Deposit(Amount);
             }
+        }
+        static void ShowAccountDetails()
+        {
+            Console.WriteLine($"Account ONE account number: {one.AccountNumber}; Balance: {one.Balance}");
+            Console.WriteLine($"Account TWO account number: {two.AccountNumber}; Balance: {two.Balance}");
         }
     }
 }
