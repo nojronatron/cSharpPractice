@@ -13,7 +13,8 @@ namespace Shapes
         public override void Draw()
         {
             // base.Draw();
-            Console.WriteLine("Drawing {0} the Hexagon", PetName);
+            // Console.WriteLine("Drawing {0} the Hexagon", PetName);
+            Console.WriteLine($"Drawing {PetName} the Hexagon (overriding abstract Shape.Draw() method).");
         }
     }
 }
