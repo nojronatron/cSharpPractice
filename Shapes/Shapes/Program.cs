@@ -27,6 +27,15 @@ namespace Shapes
             Circle cir = new Circle("Cindy");
             cir.Draw(); // calls base class implementation
 
+            // it is still possible to trigger the base class implementation of a shadowed member
+            //   using an explicit cast:
+            // Example: This calls the Draw() method of the ThreeDCircle:
+            _3dCircle o = new _3dCircle();
+            o.Draw();
+            // Example: This calls the Draw() method of the parent, Circle
+            ((Circle)o).Draw();
+
+
             // Pause program execution before exit
             Console.WriteLine();
             Console.ReadLine();
