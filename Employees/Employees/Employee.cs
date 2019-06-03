@@ -41,7 +41,7 @@ namespace Employees
             Console.WriteLine($"Name: {Name}");
             Console.WriteLine($"ID: {ID}");
             Console.WriteLine($"Age: {Age}");
-            Console.WriteLine($"Pay: {Pay}");
+            Console.WriteLine($"Pay: {Pay:c0}");
             Console.WriteLine($"SSN: {SocialSecurityNumber}");
         }
         // Contain a BenefitsPackage object

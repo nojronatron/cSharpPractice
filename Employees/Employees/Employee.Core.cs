@@ -42,7 +42,7 @@ namespace Employees
             get { return empID; }
             set
             {
-                if (value > 999)
+                if (value > 9999)
                     Console.WriteLine("Error! Employee ID must be a valid number between 001 and 999!");
                 else
                     empID = value;
