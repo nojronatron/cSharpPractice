@@ -37,7 +37,11 @@ namespace CircularShapes
         }
         public override string ToString()
         {
-            return $"{GetType(),-15} radius: {_radius,-10} perimeter: {Perimeter().ToString(),-15} area: {Area().ToString(),-15} volume: {Volume().ToString(),-15}";
+            return $"{GetType(),-15} " +
+                $"radius: {_radius,-10} " +
+                $"perimeter: {Perimeter().ToString(),-15} " +
+                $"area: {Area().ToString(),-15} " +
+                $"volume: {Volume().ToString(),-15}";
         }
     }
 }
