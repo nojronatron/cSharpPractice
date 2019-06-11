@@ -10,13 +10,94 @@ namespace Stock_Exercise
         static Stock[] Stocks = new Stock[12];
         static void Main(string[] args)
         {
-            CreateArrayOfStocks();
-            DisplayStocks();
-
-            Console.WriteLine(GetStock("MSFT"));
-
-            Console.Write("Press <Enter> Key to exit. . .");
-            Console.ReadLine();
+            while (true)
+            {
+                Console.Clear();
+                DisplayMenu();
+                int selection;
+                int.TryParse(Console.ReadLine(), out selection);
+                Console.WriteLine();
+                switch(selection)
+                {
+                    case 0: // create Array of stocks
+                        {
+                            CreateArrayOfStocks();
+                            DisplayStocks();
+                        }
+                        break;
+                    case 1: // buy stocks
+                        {
+                            Console.Write("\nEnter the company name of the stock you want to buy: ");
+                            string co = Console.ReadLine();
+                            Console.Write($"\nEnter the number of {co} stocks you want to buy: ");
+                            int.TryParse(Console.ReadLine(), out int num);
+                            Stock stck = GetStock(co);
+                            if (stck != null)
+                            {
+                                stck.BuyShares(num);
+                                Console.Write($"\nSuccessfully purchased {num} shares of {co} stock!");
+                                Console.ReadLine();
+                            }
+                            else
+                            {
+                                Console.Write($"\nUnable to purchase {num} shares of {co} stock.");
+                            }
+                        }
+                        break;
+                    case 2: // sell stocks
+                        {
+                            Console.Write("\nEnter the company name of the stock you want to sell: ");
+                            string co = Console.ReadLine();
+                            Console.Write($"\nEnter the number of {co} stocks you want to sell: ");
+                            int.TryParse(Console.ReadLine(), out int num);
+                            Stock stck = GetStock(co);
+                            if (stck != null)
+                            {
+                                if (stck.SellShares(num))
+                                {
+                                    Console.Write($"\nSuccessfully sold {num} shares of {co} stock!");
+                                }
+                                else
+                                {
+                                    Console.Write($"\nUnable to sell {num} shares of {co} stock.");
+                                }
+                            }
+                        }
+                        break;
+                    case 4: // search for specific stock
+                        {
+                            Console.WriteLine("\nEnter the compoany name of the stock you want to find: ");
+                            string co = Console.ReadLine();
+                            Console.WriteLine($"\nSearching for {co} stock... ");
+                            Console.WriteLine(GetStock(co));
+                        }
+                        break;
+                    case 5: // display all stocks
+                        {
+                            DisplayStocks();
+                        }
+                        break;
+                    case 9: // exit
+                        {
+                            return;
+                        }
+                }
+                Console.WriteLine();
+                Console.Write("Press <Enter> Key to Continue. . .");
+                Console.ReadLine();
+            }
+        }
+        static void DisplayMenu()
+        {
+            Console.WriteLine("\t***** Menu *****\n");
+            Console.WriteLine("\t0) Create Stock Portfolio");
+            Console.WriteLine("\t1) Buy Stock");
+            Console.WriteLine("\t2) Sell Stock");
+            Console.WriteLine("\t4) Display Specific Stock");
+            Console.WriteLine("\t5) Display All Stocks");
+            Console.WriteLine("\t9) Exit Program\n");
+            Console.WriteLine("\t****************\n");
+            Console.Write("\tMake A Selection: ");
         }
         static Stock GetStock(string name)
         {
