@@ -7,7 +7,7 @@ namespace Stock_Exercise
         static string[] Companies = { "MSFT", "HP", "Compaq", "IBM", "Apple",
                                       "Citrix", "LogMeIn", "ViewSonic", "Samsung", "Amazon",
                                       "NetFlix", "Activision Blizzard"};
-        static Stock[] Stocks = new Stock[12];
+        static Stock[] Stocks = new Stock[6]; // Anonymous Objects in an Array of type Stock
         static void Main(string[] args)
         {
             while (true)
@@ -31,7 +31,7 @@ namespace Stock_Exercise
                             string co = Console.ReadLine();
                             Console.Write($"\nEnter the number of {co} stocks you want to buy: ");
                             int.TryParse(Console.ReadLine(), out int num);
-                            Stock stck = GetStock(co);
+                            Stock stck = GetStock(co); // find the stock and use an object to utilize its members
                             if (stck != null)
                             {
                                 stck.BuyShares(num);
@@ -50,7 +50,7 @@ namespace Stock_Exercise
                             string co = Console.ReadLine();
                             Console.Write($"\nEnter the number of {co} stocks you want to sell: ");
                             int.TryParse(Console.ReadLine(), out int num);
-                            Stock stck = GetStock(co);
+                            Stock stck = GetStock(co); // find the stock and use an object to utilize its members
                             if (stck != null)
                             {
                                 if (stck.SellShares(num))
@@ -111,18 +111,33 @@ namespace Stock_Exercise
             }
             return null;
         }
-        static void CreateArrayOfStocks()
+        //static void CreateArrayOfStocks()
+        //{
+        //    Random rand = new Random();
+        //    for(int i=0; i<Stocks.Length; i++)
+        //    {
+        //        int index = rand.Next(0, Companies.Length);
+        //        string name = Companies[index];
+        //        int numShares = rand.Next(0, 100);
+        //        double price = rand.Next(0, 1000);
+        //        Stock stock = new Stock(name, numShares, price);
+        //        Stocks[i] = stock;
+        //    }
+        //}
+        static void CreateArrayOfStocks() // figure out how to do UNIQUE random selection
         {
+            int numCompanies = Companies.Length;
+            Double[] order = new Double[numCompanies];
             Random rand = new Random();
-            for(int i=0; i<Stocks.Length; i++)
+            for(int i=0; i<Companies.Length; i++)
             {
-                int index = rand.Next(0, Companies.Length);
-                string name = Companies[index];
-                int numShares = rand.Next(0, 100);
-                double price = rand.Next(0, 1000);
-                Stock stock = new Stock(name, numShares, price);
-                Stocks[i] = stock;
+                order[i] = rand.NextDouble();
             }
+            for(int j=0; j<Stocks.Length; j++)
+            {
+
+            }
+            Array.Sort(order, Array[]);
         }
         static void DisplayStocks()
         {
