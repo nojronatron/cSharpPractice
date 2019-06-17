@@ -27,6 +27,16 @@ namespace Employees
         {
             // Increase pay... give new parking space in company garage...
             Console.WriteLine($"{emp.Name} was promoted!");
+            // IS keyword
+            //     Used to boolean test obj Type (rather than obj/null like keyword AS)
+            if (emp is SalesPerson)
+            {
+                Console.WriteLine($"Sales Person {emp.Name} made {((SalesPerson)emp).SalesNumber} sale(s)!\n");
+            }
+            if (emp is Manager)
+            {
+                Console.WriteLine($"Manager {emp.Name} had {((Manager)emp).StockOptions} stock options...\n");
+            }
         }
         static void Main(string[] args)
         {
@@ -78,10 +88,10 @@ namespace Employees
             GivePromotion(fran);
             GivePromotion(pauly);
 
+            Keyword_AS_Example();
 
             // temporarily showing Casting Examples method()
             CastingExamples();
-
 
             // the need for an abstract class:
             // Employee emmy = new Employee("Emma", 34, 239, 47_000, "324-23-3434");
@@ -91,6 +101,36 @@ namespace Employees
 
             // pause program executions before exit
             Console.ReadLine();
+        }
+
+        private static void Keyword_AS_Example()
+        {
+            // Keyword AS: Used to test valid obj vs null obj
+            //     Compile-time: ok; RunTime: Exception
+            // => comipiles and executes => object franke = new Manager();
+            // => exception raised here => Hexagon hex = (Hexagon)franke;
+            // safe way to do this is to test for object validity before explicit casting:
+            //     try/catch
+            //     test for null using AS keyword
+            object[] things = new object[4];
+            things[0] = new Hexagon();
+            things[1] = false;
+            things[2] = new Manager();
+            things[3] = "Last thing";
+            foreach (object item in things)
+            {
+                Hexagon h = item as Hexagon;
+                if (h == null)
+                {
+                    Console.WriteLine("Item {0} is not a hexagon", item);
+                }
+                else
+                {
+                    Console.Write("AS keyword tests passed a things item: ");
+                    h.Draw();
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
