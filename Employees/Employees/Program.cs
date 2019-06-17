@@ -29,13 +29,25 @@ namespace Employees
             Console.WriteLine($"{emp.Name} was promoted!");
             // IS keyword
             //     Used to boolean test obj Type (rather than obj/null like keyword AS)
-            if (emp is SalesPerson)
+            // if (emp is SalesPerson) { Console.WriteLine($"Sales Person {emp.Name} made {((SalesPerson)emp).SalesNumber} sale(s)!\n"); }
+            // if (emp is Manager) { Console.WriteLine($"Manager {emp.Name} had {((Manager)emp).StockOptions} stock options...\n"); }
+
+            // Alternatively, use Pattern Matching
+            //     Seems like the keyword CASE does the caste and boolean comparison for us
+            switch (emp)
             {
-                Console.WriteLine($"Sales Person {emp.Name} made {((SalesPerson)emp).SalesNumber} sale(s)!\n");
-            }
-            if (emp is Manager)
-            {
-                Console.WriteLine($"Manager {emp.Name} had {((Manager)emp).StockOptions} stock options...\n");
+                case PTSalesPerson _:
+                    // Discard matching: In this case just ignore this match
+                    break;
+                case SalesPerson s:
+                    Console.WriteLine($"Sales Person {emp.Name} made {s.SalesNumber} sale(s)!\n");
+                    break;
+                case Manager m:
+                    Console.WriteLine($"Manager {emp.Name} had {m.StockOptions} stock options...\n");
+                    break;
+                case null:
+                    // in the event of a null case
+                    break;
             }
         }
         static void Main(string[] args)
