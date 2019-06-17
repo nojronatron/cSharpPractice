@@ -10,6 +10,9 @@ namespace Shapes
     {
         static void Main(string[] args)
         {
+            // Note: Cannot create an instance of the abstract class or interface "shape":
+            //     Shape abstShape = new Shape() { };
+
             Console.WriteLine("***** Fun with Polymorphism *****\n");
             // make an array of Shape-compatible objects
             Shape[] myShapes = { new Hexagon(), new Circle(), new Hexagon("Mick"), new Circle("Beth"), new Hexagon("Linda") };
@@ -34,7 +37,6 @@ namespace Shapes
             o.Draw();
             // Example: This calls the Draw() method of the parent, Circle
             ((Circle)o).Draw();
-
 
             // Pause program execution before exit
             Console.WriteLine();

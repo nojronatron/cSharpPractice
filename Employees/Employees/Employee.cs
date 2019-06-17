@@ -8,9 +8,14 @@ namespace Employees
 {
     abstract partial class Employee
     {  //  All partial class files MUST have keyword partial in their class definition and be in the same Namespace
-       // Field data
+       // Keyword abstract: programmatically protects against casting or initializing from this base Class
+       //     ...there isn't much that Employee type means without digging into one of its child classes anyway
+       // Fields
+       //     Fields are now stored in partial class Employee.core.cs
 
         // Properties:
+        //     Props are now stored in partial class Employee.core.cs
+        
         // Accessor (get method) and Mutator (set method) are complex when business logic needs to be computed
         // Properties are composed by defining a get scope (accessor) and set scope (mutator) directly
         // value is a contextual keyword, representin the value eing assigned by the caller and...
@@ -18,7 +23,8 @@ namespace Employees
         // The ONLY appropriate place to directly reference underlying private data is within the Property itself.
 
         // Constructors
-
+        //     CTORS are now stored in partial class Employee.Core.cs
+        
         // Methods
         public virtual void GiveBonus(float amount) // virtual allows a sub class to override the method
         {
