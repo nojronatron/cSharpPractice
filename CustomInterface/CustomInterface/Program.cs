@@ -24,11 +24,11 @@ namespace CustomInterface
             {
                 Console.WriteLine("Attempting to cast Circle as an IPointy type itfPt");
                 itfPt = (IPointy)c;
-                Console.WriteLine(itfPt.Points);
+                Console.WriteLine($"=> {itfPt.Points}");
             }
             catch (InvalidCastException icEx)
             {
-                Console.WriteLine($"\n{icEx.Message}");
+                Console.WriteLine($"\nXX {icEx.Message}");
                 // but there are other ways
             }
 
@@ -44,33 +44,50 @@ namespace CustomInterface
             CheckIsPointy(c3);
             CheckIsPointy(h3);
 
-
+            // Interface as Parameter
+            Console.WriteLine($"\n*** Attempt 3D drawings via Interface as a Parameter");
+            Shape[] myShapes = { new Hexagon(), new Circle(), new Triangle("Joe"), new _3dCircle("JoJoJo") };
+            for(int i=0; i<myShapes.Length; i++)
+            {
+                // Can I draw you in 3D?
+                if(myShapes[i] is IDraw3D)
+                {
+                    DrawIn3D((IDraw3D)myShapes[i]);
+                }
+            }
 
             // pause program execution before exiting
             Console.Write("\n\nPress <Enter> Key to Exit. . .");
             Console.ReadLine();
         }
+        static void DrawIn3D(IDraw3D itf3d)
+        {
+            Console.WriteLine("\n=> Drawing IDRaw3d compatible type");
+            itf3d.Draw3D();
+        }
         public static void CheckIsPointy(Shape s)
         {
+            Console.WriteLine("\n*** check IS pointy");
             if (s is IPointy ip)
             {
-                Console.WriteLine($"\n{s.PetName} has {ip.Points} points.");
+                Console.WriteLine($"=> {s.PetName} has {ip.Points} points.");
             }
             else
             {
-                Console.WriteLine($"\n{s.PetName} {s.GetType().Name} does not implement the IPointy Interface.");
+                Console.WriteLine($"XX {s.PetName} {s.GetType().Name} does not implement the IPointy Interface.");
             }
         }
         public static void CheckAsPointy(Shape s)
         {
+            Console.WriteLine("\n*** check AS pointy");
             IPointy anyPoints = s as IPointy;
             if (anyPoints == null)
             {
-                Console.WriteLine($"\n{s.PetName} {s.GetType().Name} does not implement the IPointy Interface.");
+                Console.WriteLine($"XX {s.PetName} {s.GetType().Name} does not implement the IPointy Interface.");
             }
             else
             {
-                Console.WriteLine($"\n{s.PetName} has {anyPoints.Points} points.");
+                Console.WriteLine($"=> {s.PetName} has {anyPoints.Points} points.");
             }
         }
     }

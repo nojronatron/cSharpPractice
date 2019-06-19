@@ -7,7 +7,7 @@ using CustomInterface;
 
 namespace Shapes
 {
-    class Hexagon:Shape, IPointy
+    class Hexagon:Shape, IPointy, IDraw3D
     {
         public Hexagon() { }
         public Hexagon(string name) : base(name) { }
@@ -25,6 +25,10 @@ namespace Shapes
         {
             // MUST be implemented
             return Points;
+        }
+        public void Draw3D()
+        {
+            Console.WriteLine("\nDrawing Hexagon in 3D!");
         }
     }
 }
