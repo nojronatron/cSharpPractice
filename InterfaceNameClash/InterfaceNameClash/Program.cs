@@ -17,12 +17,12 @@ namespace InterfaceNameClash
             IDrawToForm itfForm = (IDrawToForm)oct;
             itfForm.Draw();
 
-            IDrawToPrinter itfPrinter = (IDrawToPrinter)oct;
-            itfPrinter.Draw();
+            // shorthand notation if variable not needed afterward
+            ((IDrawToPrinter)oct).Draw();
 
-            IDrawToMemory itfMemory = (IDrawToMemory)oct;
-            itfMemory.Draw();
-
+            // can also use the "is" keyword
+            if (oct is IDrawToMemory dtm) dtm.Draw();
+            
 
             Console.ReadLine();
         }
@@ -41,10 +41,25 @@ namespace InterfaceNameClash
     }
     class Octogon : IDrawToForm, IDrawToMemory, IDrawToPrinter
     {
-        public void Draw()
+        //public void Draw()
+        //{
+        //    // Shared drawing logic
+        //    Console.WriteLine("Drawing the Octagon...");
+        //}
+
+        // Explicitly bind Draw() implementations to a given interface
+        //     Explicit Casting will be required to access the required functionality
+        void IDrawToForm.Draw() // access modifier no longer allowed; explicitly implemented members are automatically private
         {
-            // Shared drawing logic
-            Console.WriteLine("Drawing the Octagon...");
+            Console.WriteLine("Drawing the Octagon...to FORM.");
+        }
+        void IDrawToMemory.Draw()
+        {
+            Console.WriteLine("Drawing the Octagon...to MEMORY.");
+        }
+        void IDrawToPrinter.Draw()
+        {
+            Console.WriteLine("Drawing the Octagon...to PRINTER.");
         }
     }
 }
