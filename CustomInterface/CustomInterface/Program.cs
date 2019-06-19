@@ -56,11 +56,25 @@ namespace CustomInterface
                 }
             }
 
+            // Using Interface as a Return Value
+            // Get first Pointy item - but first check firstPointyItem for null before proceeding
+            IPointy firstPointyItem = FindFirstPointyShape(myShapes);
+            Console.WriteLine($"The first pointy item has {firstPointyItem.Points} points.");
+
+
             // pause program execution before exiting
             Console.Write("\n\nPress <Enter> Key to Exit. . .");
             Console.ReadLine();
         }
-        static void DrawIn3D(IDraw3D itf3d)
+        public static IPointy FindFirstPointyShape(Shape[] shapes)
+        {
+            foreach(Shape s in shapes)
+            {
+                if (s is IPointy ip) return ip;
+            }
+            return null;
+        }
+        public static void DrawIn3D(IDraw3D itf3d)
         {
             Console.WriteLine("\n=> Drawing IDRaw3d compatible type");
             itf3d.Draw3D();
