@@ -43,8 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alligator.cs" />
+    <Compile Include="Coyote.cs" />
+    <Compile Include="IAnimal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Puppy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
