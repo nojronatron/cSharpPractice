@@ -338,3 +338,4 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/IComparable_IComparer_Interfaces/UnitTests/nunit.framework.dll
