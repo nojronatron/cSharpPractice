@@ -9,7 +9,8 @@ Bookmarks
 Completed: 
 https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-a-controller
 https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-a-view
+https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-a-model
 
 Current: 
-https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-a-model
+https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/creating-a-connection-string
 
