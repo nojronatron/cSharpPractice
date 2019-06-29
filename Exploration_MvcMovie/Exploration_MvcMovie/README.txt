@@ -11,7 +11,7 @@ https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introductio
 https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-a-view
 https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-a-model
 https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/creating-a-connection-string
-
-Current: 
 https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/accessing-your-models-data-from-a-controller
 
+Current: 
+https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/examining-the-edit-methods-and-edit-view
