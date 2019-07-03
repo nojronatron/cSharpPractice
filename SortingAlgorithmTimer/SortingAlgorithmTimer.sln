@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortingAlgorithmTimer", "SortingAlgorithmTimer\SortingAlgorithmTimer.csproj", "{DE92A3BB-5D20-448E-AFFE-8F1FA020B763}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE92A3BB-5D20-448E-AFFE-8F1FA020B763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE92A3BB-5D20-448E-AFFE-8F1FA020B763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE92A3BB-5D20-448E-AFFE-8F1FA020B763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE92A3BB-5D20-448E-AFFE-8F1FA020B763}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E59541CB-58BA-4D30-81BA-68FB8B1E9B5F}
+	EndGlobalSection
+EndGlobal
