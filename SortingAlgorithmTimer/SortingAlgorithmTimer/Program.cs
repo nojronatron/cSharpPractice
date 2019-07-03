@@ -12,7 +12,7 @@ namespace SortingAlgorithmTimer
         static void Main(string[] args)
         {
             // create an array to do the timing
-            Console.WriteLine("***** Selection Sort Timer *****");
+            Console.WriteLine("***** Sort Timer *****");
             Console.Write("Enter number of elements: ");
             int n;
             string mySortType = "";
@@ -23,14 +23,18 @@ namespace SortingAlgorithmTimer
             Stopwatch sw1 = new Stopwatch();
             sw1.Start();
             // sort the aray
-            // mySortType = "Selection Sort";
-            // SelectionSort(array1);
-            mySortType = "Insertion Sort";
-            InsertionSort(array1);
+            mySortType = "Selection Sort";
+            SelectionSort(array1);
             // stop timer
             sw1.Stop();
             // display elapsed time
-            Console.WriteLine($"\n{mySortType} Sort elapsed time: {sw1.Elapsed}"); // output format: HHMMSSmm
+            Console.WriteLine($"\n{mySortType} sort elapsed time: {sw1.Elapsed}");  // output format: HHMMSSmm
+            sw1.Reset();
+            sw1.Start();
+            mySortType = "Insertion Sort";
+            InsertionSort(array1);
+            sw1.Stop();
+            Console.WriteLine($"\n{mySortType} Sort elapsed time: {sw1.Elapsed}");
 
             Console.WriteLine("\n\nPress <Enter> to exit. . .");
             Console.ReadLine();
