@@ -21,6 +21,40 @@ namespace LinkedList_Datastructure
         public MyLinkedListNode First { get { return first; } }
         public MyLinkedListNode Last { get { return last; } }
         // help us manage all the nodes using Methods() e.g. Add, Remove, and SearchFor node
+        public MyLinkedListNode AddAfter(MyLinkedListNode node, object data)
+        {
+            MyLinkedListNode newnode = new MyLinkedListNode(data);
+            if (node == null)
+            {
+                throw new ArgumentNullException("null object!");
+            }
+            if (node == last)
+            {
+                AddLast(newnode); // AddLast increments the count for us!
+                return newnode;
+            }
+            MyLinkedListNode temp = node.next;
+            node.next = newnode;
+            newnode.previous = node;
+            newnode.next = temp;
+            temp.previous = newnode;
+            count++;    // always manage the count of nodes!!
+            return newnode;
+        }
+        public MyLinkedListNode Find(object data)
+        {
+            // take data to search and return the node or null
+            MyLinkedListNode temp = first;
+            while(temp != null) // null is the proper way to end this because we are searching objects (compiler specific)
+            {
+                if(temp.data.Equals(data)) // when comparing two objects use Equals() and use an override
+                {
+                    return temp;
+                }
+                temp = temp.next; // use existing reference to point to the next node (by REF), think i++
+            }
+            return null;
+        }
         public void AddFirst(object data)
         {
             // create a new node
@@ -62,6 +96,21 @@ namespace LinkedList_Datastructure
             }
             count--;
         }
+        public void AddLast(object data)
+        {
+            MyLinkedListNode node = new MyLinkedListNode(data);
+            if (count == 0)
+            {
+                first = node;
+            }
+            else
+            {
+                last.next = node; // this one I could not figure out
+                node.previous = last; // I figured this out
+            }
+            last = node; // I figured this out
+            count++;
+        }
         public void RemoveLast()
         {
             // DONE: Homework -- finish this Method()
@@ -89,21 +138,6 @@ namespace LinkedList_Datastructure
             count--; // reduce count by one
             // object is now orphaned and GC will take care of it eventually
         }
-        public void AddLast(object data)
-        {
-            MyLinkedListNode node = new MyLinkedListNode(data);
-            if (count == 0)
-            {
-                first = node;
-            }
-            else
-            {
-                last.next = node; // this one I could not figure out
-                node.previous = last; // I figured this out
-            }
-            last = node; // I figured this out
-            count++;
-        }
         public void CopyTo(object[] array, int starting_index) // array, starting index
         {
             if (array == null)
@@ -130,5 +164,6 @@ namespace LinkedList_Datastructure
                 temp = temp.next; // go to the next object by REFerence
             }
         }
+        // TODO: override obj.Equals()
     }
 }
