@@ -82,9 +82,8 @@ namespace LinkedList_Datastructure
             else // (count > 1)
             {
                 MyLinkedListNode previous_to_last = last.previous; // create temp node REF for manipulating properties
-                previous_to_last.next.previous = null; // remove current last node's reference to previous
-                last.previous = null; // disconnect link from second-to-last node to last
-                previous_to_last.next = null; // remove link to current last node
+                last.previous = null; // remove current last node's reference to previous
+                previous_to_last.next = null; // disconnect link from second-to-last node to last
                 last = previous_to_last; // set last pointer to this temp node/object
             }
             count--; // reduce count by one
