@@ -99,6 +99,8 @@ namespace StackArrayImplementation
         //    merge by alternating between q1 and q2
         //    an item from q1 then an item from q2, then back and forth
         //    the two q's don't have to be of the same size
+        // TODO: Re-write the Merge() method using WHILE loops instead of FOR loops with IF/THEN conditionals
+        //       and use as few resources as possible
         static Queue<int> Merge(Queue<int> queue1, Queue<int> queue2)
         {
             int max_size = 0;
@@ -136,11 +138,13 @@ namespace StackArrayImplementation
         }
 
         // DONE: Write a method that removes last half of a Queue
+        // TODO: Re-write this so that a temp object is not used (fewer resources)
+        // TODO: Be sure to handle both odd & even number queue lengths
         static void RemoveLastHalf(Queue<string> queue)
         {
             // example queue has 10 items alpha through kilo
             // get the size of the source Collection
-            int q_size = queue.Count;
+            int q_size = queue.Count;   // TODO: Remove this line, not needed
             // find the mid-point to use as a stop marker
             int mid_point = queue.Count / 2;
             // create a temp Queue collection to store items in
@@ -149,6 +153,9 @@ namespace StackArrayImplementation
             for (int i=0; i < mid_point; i++)
             {
                 temp.Enqueue(queue.Dequeue());
+                // Example Queue & Dequeue:
+                //          <type> item = queue.Dequeue();
+                //          queue.Enqueue(item);
             }
             // reset the REF to queue to point to new Queue temp in memory
             queue = temp;
