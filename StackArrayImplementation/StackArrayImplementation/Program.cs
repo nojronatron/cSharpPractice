@@ -17,13 +17,18 @@ namespace StackArrayImplementation
             myStack1.Push("Karen");
 
             // copy stack to an array
-            // object[] dataArray = ms1.ToArray();
-            // display the copied stack array
-            // Display(dataArray);
-            DisplayStack(myStack1); // using IEnumerable's GetEnumerator is the correct way to implement this
+            // 1) bad example:
+            //      object[] dataArray = ms1.ToArray();
+            //      display the copied stack array
+            //      Display(dataArray);
+            // 2) the right way...
+            DisplayMyStack(myStack1); // using IEnumerable's GetEnumerator is the correct way to implement this
 
             myStack1.Push("Steve");
-            DisplayStack(myStack1);
+            Console.WriteLine("Adding \"Steve\" to myStack1. . .");
+            DisplayMyStack(myStack1);
+
+            Console.ReadLine();
 
             Console.WriteLine($"\nCurrent \"Top\" item: {myStack1.Peek()}");
             Console.WriteLine($"\nPOPing the \"Top\" item: {myStack1.Pop()}");
@@ -37,10 +42,12 @@ namespace StackArrayImplementation
             myStack1.Pop();
             // this last one will cause an Exception to be thrown because the Stack is empty
             // ms1.Pop();
+
             Console.ReadLine();
             Console.Clear();
 
             Console.WriteLine("***** Exercises: CopyToQueue, CopyToStack, and Reverse *****");
+            Console.WriteLine("\nUse DEBUG to see CopyToQueue(myStack2) and CopyToStack(myQueue1) execute.");
             Stack<string> myStack2 = new Stack<string>(5);
             myStack2.Push("one");
             myStack2.Push("two");
@@ -48,7 +55,12 @@ namespace StackArrayImplementation
             myStack2.Push("four");
             myStack2.Push("five");
             Queue<string> myQueue1 = CopyToQueue(myStack2);
+            DisplayStringQueue(myQueue1, "myQueue1 created by copying from myStack2");
             Stack<string> myStack3 = CopyToStack(myQueue1);
+            DisplayStack(myStack3, "myStack3 created by copying from myQueue1");
+
+            Console.ReadLine();
+            Console.Clear();
 
             // reverse a queue
             Queue<string> myQueue2 = new Queue<string>(5);
@@ -57,20 +69,44 @@ namespace StackArrayImplementation
             myQueue2.Enqueue("charlie");
             myQueue2.Enqueue("delta");
             myQueue2.Enqueue("foxtrot");
-            Reverse(myQueue2);
-            
+            DisplayStringQueue(myQueue2, "Phonetics Stack before reversal");
+            Reverse(myQueue2);  // built-in operations will empty myQueue2 and display the temp Stack so both empty after execution
+
+            Console.ReadLine();
+            Console.Clear();
+
             // remove last have of queue
             myQueue2.Enqueue("alpha");
             myQueue2.Enqueue("bravo");
             myQueue2.Enqueue("charlie");
             myQueue2.Enqueue("delta");
+            myQueue2.Enqueue("echo");
             myQueue2.Enqueue("foxtrot");
             myQueue2.Enqueue("golf");
             myQueue2.Enqueue("hotel");
             myQueue2.Enqueue("india");
             myQueue2.Enqueue("juliet");
             myQueue2.Enqueue("kilo");
+            myQueue2.Enqueue("lima");   
+            myQueue2.Enqueue("mike");   // 13
+            myQueue2.Enqueue("november");
+            myQueue2.Enqueue("oscar");
+            myQueue2.Enqueue("papa");
+            myQueue2.Enqueue("quebec");
+            myQueue2.Enqueue("roger");
+            myQueue2.Enqueue("sierra");
+            myQueue2.Enqueue("tango");
+            myQueue2.Enqueue("uniform");
+            myQueue2.Enqueue("victor");
+            myQueue2.Enqueue("whiskey");
+            myQueue2.Enqueue("x-ray");
+            myQueue2.Enqueue("yankee"); // 25
+            //myQueue2.Enqueue("zulu");   // 26
+            DisplayStringQueue(myQueue2, "myQueue2 before RemoveLastHalf()");
             RemoveLastHalf(myQueue2);
+
+            Console.ReadLine();
+            Console.Clear();
 
             // merge two queues into one
             Console.WriteLine("***** Merge Two Queues *****");
@@ -84,22 +120,19 @@ namespace StackArrayImplementation
             myQueue4.Enqueue(10);
             myQueue4.Enqueue(20);
             myQueue4.Enqueue(30);
-            Console.WriteLine($"\nMyQueue3 Contents:");
-            DisplayIntQueue(myQueue3);
-            Console.WriteLine($"\nMyQueue4 Contents:");
-            DisplayIntQueue(myQueue4);
-            Console.WriteLine("\nMerging MyQueue3 and MyQueue4. . .");
+            DisplayIntQueue(myQueue3, "myQueue3");
+            DisplayIntQueue(myQueue4, "myQueue4");
             
-            DisplayIntQueue(Merge(myQueue3, myQueue4));
+            DisplayIntQueue(Merge(myQueue3, myQueue4), "Merged myQueue3 and myQueue4");
 
-            Console.Write("\n\nPress <Enter> to exit. . .");
+            Console.Write("\nPress <Enter> to exit. . .");
             Console.ReadLine();
         }
         // DONE: Merge two queue into a single queue to return
         //    merge by alternating between q1 and q2
         //    an item from q1 then an item from q2, then back and forth
         //    the two q's don't have to be of the same size
-        // TODO: Re-write the Merge() method using WHILE loops instead of FOR loops with IF/THEN conditionals
+        // DONE: Re-write the Merge() method using WHILE loops instead of FOR loops with IF/THEN conditionals
         //       and use as few resources as possible
         static Queue<int> Merge(Queue<int> queue1, Queue<int> queue2)
         {
@@ -115,59 +148,45 @@ namespace StackArrayImplementation
                 max_size = q2_count;
             }
             Queue<int> mergedQueue = new Queue<int>(max_size);
-            for (int i = 0; i <= max_size; i++)
+            while (queue1.Count > 0 && queue2.Count > 0)
             {
-                try
-                {
-                    if (queue1.Count > 0)
-                    {
-                        mergedQueue.Enqueue(queue1.Dequeue());
-                    }
-                    if (queue2.Count > 0)
-                    {
-                        mergedQueue.Enqueue(queue2.Dequeue());
-                    }
-                }
-                catch (InvalidOperationException ioe)
-                {
-                    Console.WriteLine($"Caught an exception: {ioe.Message}\n{ioe.StackTrace}");
-                }
+                mergedQueue.Enqueue(queue1.Dequeue());
+                mergedQueue.Enqueue(queue2.Dequeue());
             }
-            // queue1 = mergedQueue;
+            while (queue1.Count > 0)
+            {
+                mergedQueue.Enqueue(queue1.Dequeue());
+            } while (queue2.Count > 0)
+            {
+                mergedQueue.Enqueue(queue2.Dequeue());
+            }
             return mergedQueue;
         }
-
         // DONE: Write a method that removes last half of a Queue
-        // TODO: Re-write this so that a temp object is not used (fewer resources)
-        // TODO: Be sure to handle both odd & even number queue lengths
+        // DONE: Re-write this so that a temp object is not used (fewer resources)
+        // DONE: Be sure to handle both odd & even number queue lengths
         static void RemoveLastHalf(Queue<string> queue)
         {
             // example queue has 10 items alpha through kilo
             // get the size of the source Collection
-            int q_size = queue.Count;   // TODO: Remove this line, not needed
+            // DONE: Remove "int q_size = queue.Count;" (not needed)
             // find the mid-point to use as a stop marker
-            int mid_point = queue.Count / 2;
-            // create a temp Queue collection to store items in
-            Queue<string> temp = new Queue<string>(mid_point);
-            // cycle through items zero through mid_point, enqueuing them to the new queue, then stop
-            for (int i=0; i < mid_point; i++)
+            int mid_point = queue.Count / 2;    // by forcing mid_point to be an int a rounding is accomplished
+            Console.WriteLine("===>>> Executing RemoveLastHalf() method.");
+            while(queue.Count > mid_point)
             {
-                temp.Enqueue(queue.Dequeue());
+                Console.WriteLine(queue.Dequeue());
                 // Example Queue & Dequeue:
                 //          <type> item = queue.Dequeue();
                 //          queue.Enqueue(item);
             }
-            // reset the REF to queue to point to new Queue temp in memory
-            queue = temp;
-            Console.WriteLine($"\nResults of RemoveLastHalf() method:");
-            DisplayStringQueue(queue);
             // for this exercise it is _not_ necessary to return or display the results (just use a breakpoint to watch it)
             Console.WriteLine();
         }
 
         // write a method that copies a stack to a queue
-        //1) at the end stack is empty and the queue would hold the original content
-        //    in such a way that the top of the stack be the first in teh queue
+        // at the end stack is empty and the queue would hold the original content
+        //    in such a way that the top of the stack be the first in the queue
         static Queue<string> CopyToQueue(Stack<string> stack)
         {
             int initial_size = stack.Count;
@@ -189,6 +208,17 @@ namespace StackArrayImplementation
             }
             return s1;
         }
+        // DONE: create a Method that returns Type MyStack
+        // TODO: now test it
+        static MyStack CopyToMyStack(Queue<string> queue)
+        {
+            MyStack ms1 = new MyStack(queue.Count);
+            while (queue.Count > 0)
+            {
+                ms1.Push(queue.Dequeue());
+            }
+            return ms1;
+        }
         // reverse a queue using a stack as a helper
         static void Reverse(Queue<string> queue)
         {
@@ -197,26 +227,25 @@ namespace StackArrayImplementation
             // print-out the queue contents
             int initial_size = queue.Count;
             Stack<string> temp_stack = new Stack<string>(initial_size);
-            for (int i=0; i < initial_size; i++)
+            while (queue.Count > 0)
             {
-                 temp_stack.Push(queue.Dequeue());
+                temp_stack.Push(queue.Dequeue());
             }
-            Console.WriteLine($"\nReverse ordered Stack follows...");
-            for(int j=0; j < initial_size; j++)
+            Console.WriteLine($"\n===>>> Reverse ordered Stack follows...");
+            while (temp_stack.Count > 0)
             {
                 Console.WriteLine(temp_stack.Pop());
             }
             Console.WriteLine();
         }
-        static void DisplayStack(MyStack stack)
+        static void DisplayMyStack(MyStack stack, string comment="Displaying a MyStack")
         {
-            Console.WriteLine("\nCurrent contents of MyStack");
-            Console.WriteLine("===========================");
+            Console.WriteLine($"\n***** {comment} *****");
             foreach(object item in stack)
             {
                 Console.WriteLine($"{item}");
             }
-            Console.WriteLine("===========================\n");
+            Console.WriteLine();
         }
         // below is legacy code that does not take advantage of DotNet's IEnumerable interface
         // static void Display(object[] arr)
@@ -228,9 +257,18 @@ namespace StackArrayImplementation
         //        Console.WriteLine(data);
         //    }
         //}
-        static void DisplayIntQueue(Queue<int> a_queue)
+        static void DisplayStack(Stack<string> stack, string comment = "Displaying a Stack<string>")
+        {   // This helper function created to handle Type Stack<> stacks
+            Console.WriteLine($"\n***** {comment} *****");
+            foreach (object item in stack)
+            {
+                Console.WriteLine($"{item}");
+            }
+            Console.WriteLine();
+        }
+        static void DisplayIntQueue(Queue<int> a_queue, string comment="Displaying a Queue<int>")
         {
-            Console.WriteLine("\n***** Displaying Contents of a Queue<int> *****");
+            Console.WriteLine($"\n***** {comment} *****");
             Array temp = a_queue.ToArray();
             int limit = temp.Length;
             for (int i=0; i<limit; i++)
@@ -239,9 +277,9 @@ namespace StackArrayImplementation
             }
             Console.WriteLine();
         }
-        static void DisplayStringQueue(Queue<string> a_queue)
+        static void DisplayStringQueue(Queue<string> a_queue, string comment="Displaying a Queue<string>")
         {
-            Console.WriteLine("\n***** Displaying Contents of a Queue<string> *****");
+            Console.WriteLine($"\n***** {comment} *****");
             Array temp = a_queue.ToArray();
             int limit = temp.Length;
             for (int i=0; i<limit; i++)

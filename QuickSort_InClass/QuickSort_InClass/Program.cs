@@ -14,23 +14,23 @@ namespace QuickSort_InClass
             int size = 30;
             // int[] arr = { 20, 15, 35, 6, 27, 10, 39, 18, 19, 8 };
             // int[] arr = { 20, 35, 8, 12, 50, 30, 15, 18, 39, 31, 7, 17 };
-            int[] arr = { };
+            int[] arr = new int[size];
 
             Random rand = new Random();
-            for(int i=0; i<=size; i++)
+            for (int i = 0; i < size; i++)
             {
-                // TODO: Fix this to fill the array with integers between 0 and size
-                int next_number = rand.Next(0, size);
-                arr.Append(next_number);
+                // DONE: Fix this to fill the array with integers between 0 and size
+                int next_number = rand.Next(0, size*3);
+                arr[i] = next_number;
             }
 
-            Console.Write($"Starting array:");
+            Console.WriteLine($"Starting array:");
             DisplayArray(arr);
 
             // test the partition method
             int pivotindex = partition(arr, 0, arr.Length - 1);
-            Console.WriteLine("\nArray after the first partition. . .");
-            DisplayArray(arr);
+            //Console.WriteLine("\nArray after the first partition. . .");
+            //DisplayArray(arr);
             int First = 0;
             int Last = arr.Length - 1;
             QuickSort(arr, First, Last);
@@ -46,8 +46,9 @@ namespace QuickSort_InClass
         {
             foreach (int item in array)
             {
-                Console.WriteLine($"{item} ");
+                Console.Write($"{item} ");
             }
+            Console.WriteLine();
         }
         // recursive method 'quicksort' to fire-off the actual work in method Partition()
         static void QuickSort(int[] array, int First, int Last)
@@ -58,6 +59,8 @@ namespace QuickSort_InClass
                 return; // if First and Last cross each other, we are done, return
             }
             int pivotIndex = partition(array, First, Last);
+            //Console.Write("Array after partition() call: ");
+            //DisplayArray(array);
             // now repeat the partitioning to the left part and the right part
             QuickSort(array, First, pivotIndex - 1);    // left-side sub-array
             QuickSort(array, pivotIndex + 1, Last);     // right-side sub-array
