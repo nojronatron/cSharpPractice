@@ -28,7 +28,7 @@ namespace HashFunctions
                 int index = Map(hashvalue, table.Length);
                 // TODO: Try adding these entries to a list
                 // TODO: Try to SORT the list (to check for duplicates)
-                Console.WriteLine($"{ key,-25}{hashvalue,-20}{index}");
+                Console.WriteLine($"{ key,-25}{hashvalue,-15}{index}");
             }
 
 
