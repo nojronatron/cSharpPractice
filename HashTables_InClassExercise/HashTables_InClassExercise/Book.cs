@@ -41,7 +41,7 @@ namespace HashTables_InClassExercise
 
         public override string ToString()
         {
-            return $"{_title,-20}{_publisher,-20}{_author,-20}{_isbn,-20}{_price:c}";
+            return $"Title: {_title}\nPublisher: {_publisher}\nAuthor: {_author}\nISBN: {_isbn}\nPrice: {_price:c}";
         }
     }
 

@@ -60,18 +60,60 @@ namespace HashTables_InClassExercise
                                        // alternatively, the key could be manually generated
             bookDict.Add(b2.ISBN, b2);
             bookDict.Add(b3.ISBN, b3);
-            
+
             // apply a foreach to a dictionary
-            foreach (KeyValuePair<string, Book> kvp in bookDict)
-            {
-                Book book = kvp.Value;
-                Console.WriteLine(book);    // default action is the overridden ToString()
-            }
+            DisplayDictionaryItems(bookDict);
 
             // ==========================
+            // DONE: Request an ISBN from a user
+            Console.Write("\n\nEnter a book ISBN: ");
+            string user_input = Console.ReadLine();
+            Console.WriteLine();
 
-            Console.Write("Press <Enter> key to exit. . .");
+            // DONE: Apply TryGet to search and display notfound or the matched book
+            Book result;
+            if(bookDict.TryGetValue(user_input, out result))
+            {
+                Console.WriteLine($"Found: {result.ToString()}");
+                // DONE: Use RemoveItemFromHashTable() to remove the user-identified item
+                    RemoveItemFromDictionary(bookDict, user_input);
+            }
+            else
+            {
+                Console.Write($"ISBN {user_input} not found.\nPress <Enter> key to continue. . .");
+                Console.ReadLine();
+                return;
+            }
+
+            // display results to confirm item removed
+            DisplayDictionaryItems(bookDict);
+
+
+            Console.Write("\n\nPress <Enter> key to exit. . .");
             Console.ReadLine();
+        }
+        // helper method to display items in a Dictionary
+        static void DisplayDictionaryItems(Dictionary<string, Book> d)
+        {
+            Console.WriteLine($"\nList of books in Dictionary:");
+            foreach (KeyValuePair<string, Book> kvp in d)
+            {
+                Book book = kvp.Value;
+                Console.WriteLine($"{book}\n");    // default action is the overridden ToString()
+            }
+            Console.WriteLine("\n");
+        }
+        // Kluge to work-around RemoveItemFromHashTable glued to MyHashtable type but Dictionary being used
+        static void RemoveItemFromDictionary(Dictionary<string, Book> d, string k)
+        {
+            try
+            {
+                d.Remove(k);
+            }
+            catch (ArgumentNullException anex)
+            {
+                Console.WriteLine($"Key{k} could not be removed.\n{anex.Message}\n{anex.GetType().ToString()}");
+            }
         }
         static void RemoveItemFromHashtable(MyHashtable t, int k)
         {
@@ -79,7 +121,8 @@ namespace HashTables_InClassExercise
             {
                 t.Remove(k);
             }
-            catch(InvalidOperationException ioe)
+            //catch(InvalidOperationException ioe)
+            catch(ArgumentNullException)
             {
                 Console.WriteLine($"key: {k} not in hashtable!");
             }
