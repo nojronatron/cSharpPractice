@@ -25,6 +25,11 @@ namespace Dictionary_Collection_InClassExercise
                             {
                                 DisplayAccounts(kvp);
                             }
+                            //Console.WriteLine("*** Display using TOSTRING ***");
+                            //foreach (KeyValuePair<int, Account> kvp2 in accountDictionary)
+                            //{
+                            //    Console.WriteLine(kvp2.ToString());
+                            //}
                         }
                         break;
                     case 2: //search by key
@@ -80,8 +85,8 @@ namespace Dictionary_Collection_InClassExercise
             // helper method for displaying results of user-selected actions like display and search
             Console.WriteLine($"Account Number: {kvp.Value.AccountNumber}");
             Console.WriteLine($"Bank Name: {kvp.Value.BankName}");
-            Console.WriteLine($"Date Created: {kvp.Value.DateCreated}");
-            Console.WriteLine($"Balance: {kvp.Value.Balance}");
+            Console.WriteLine($"Date Created: {kvp.Value.DateCreated.ToShortDateString()}");
+            Console.WriteLine($"Balance: {kvp.Value.Balance:c}");
             Console.WriteLine();
         }
         static void Preload(Dictionary<int, Account> dictionary)

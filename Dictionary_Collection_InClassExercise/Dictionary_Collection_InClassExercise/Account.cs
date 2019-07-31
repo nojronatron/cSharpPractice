@@ -12,6 +12,10 @@ namespace Dictionary_Collection_InClassExercise
         public decimal Balance { get; set; }
         public DateTime DateCreated { get; set; }
         public string BankName { get; set; }
+        // TODO: Add a ToString() override (does it require an IEnumerator or something?
+        public override string ToString()
+        {
+            return $"Account Number:\t{AccountNumber}\nBank Name:\t{BankName}\nDate Created:\t{DateCreated.ToShortDateString()}\nBalance:\t{Balance:c}";
+        }
     }
-
 }
