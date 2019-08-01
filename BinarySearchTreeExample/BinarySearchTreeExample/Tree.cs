@@ -69,7 +69,7 @@ namespace BinarySearchTreeExample
         // traversing the BST
         private void Inorder(TreeNode node, Queue queue)    // user should not see this
         {
-            // left, node, right
+            // left, node, right (LNR :: Sorted ascending indices)
             if (node == null)
             {
                 return;
@@ -89,6 +89,7 @@ namespace BinarySearchTreeExample
         }
         private void Preorder(TreeNode node, Queue queue)
         {
+            // NLR
             if (node == null)
             {
                 return;
@@ -97,7 +98,41 @@ namespace BinarySearchTreeExample
             Preorder(node.left, queue);
             Preorder(node.right, queue);
         }
-        // TODO: Create public Postorder Queue methods
-        // TODO: Create private Postorder recursive method
+        // DONE: Create public Postorder Queue methods
+        public Queue Postorder()
+        {
+            Queue queue = new Queue();
+            Postorder(root, queue);
+            return queue;
+        }
+        // DONE: Create private Postorder recursive method
+        private void Postorder(TreeNode node, Queue queue)
+        {
+            // LRN
+            if (node == null)
+            {
+                return;
+            }
+            Postorder(node.left, queue);
+            Postorder(node.right, queue);
+            queue.Enqueue(node.entry);
+        }
+        public Queue OutOrder()
+        {
+            Queue queue = new Queue();
+            Outorder(root, queue);
+            return queue;
+        }
+        private void Outorder(TreeNode node, Queue queue)
+        {
+            // RNL: reverse order a.k.a. Descending
+            if (node == null)
+            {
+                return;
+            }
+            Outorder(node.right, queue);
+            queue.Enqueue(node.entry);
+            Outorder(node.left, queue);
+        }
     }
 }

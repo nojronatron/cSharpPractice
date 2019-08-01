@@ -13,33 +13,41 @@ namespace BinarySearchTreeExample
         {
             Tree t = new Tree();
 
-            t.Insert(50, "Jon");        // key is more important in this example
-            t.Insert(40, "Melissa");
-            t.Insert(75, "Aaron");
-            t.Insert(30, "Kris");
-            t.Insert(45, "Sarah");
-            t.Insert(20, "Kaylee");
-            t.Insert(35, "Joan");
+            t.Insert(50, "Dad");        // key is more important in this example
+            t.Insert(49, "Mom");
+            t.Insert(29, "Eldest Son");
+            t.Insert(25, "Second Son");
+            t.Insert(24, "Daughter");
+            t.Insert(5, "Granddaughter");
+            t.Insert(83, "Grandmother");
+            t.Insert(81, "Grandfather");
+            t.Insert(4, "Dog");
 
             Queue sortedTree = t.Inorder();
-
-            Console.WriteLine("*** Inorder traversal results ***");
-            foreach (DictionaryEntry de in sortedTree)
-            {
-                Console.WriteLine($"{de.Key}\t{de.Value}");
-            }
-            Console.WriteLine();
+            DisplayResults(sortedTree, "Inorder");
 
             Queue preorderTree = t.Preorder();
-            Console.WriteLine("*** Preorder traversal results ***");
-            foreach (DictionaryEntry de in preorderTree)
-            {
-                Console.WriteLine($"{de.Key}\t{de.Value}");
-            }
-            Console.WriteLine();
+            DisplayResults(preorderTree, "Preorder");
+
+            Queue postorderTree = t.Postorder();
+            DisplayResults(postorderTree, "Postorder");
+
+            Queue outorderTree = t.OutOrder();
+            DisplayResults(outorderTree, "Outorder");
+
 
             Console.Write("\n\nPress <Enter> Key to Exit. . .");
             Console.ReadLine();
+        }
+        static void DisplayResults(Queue q, string sortType)
+        {
+            Console.WriteLine($"*** {sortType} traversal results ***");
+            foreach (DictionaryEntry de in q)
+            {
+                Console.WriteLine($"{de.Key}\t{de.Value}");
+            }
+            Console.WriteLine();
+
         }
     }
 }
