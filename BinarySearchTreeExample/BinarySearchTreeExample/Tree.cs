@@ -59,6 +59,123 @@ namespace BinarySearchTreeExample
             count++;
             return;
         }
+        public TreeNode Get(object key)
+        {
+            // return the TreeNode with the given key or null if not found
+            if (root == null)
+            {
+                return null;
+            }
+            TreeNode temp = root;
+            while (temp != null)
+            {
+                if (key.GetHashCode().Equals(temp.entry.Key.GetHashCode()))
+                {
+                    return temp;
+                }
+                if (key.GetHashCode() < temp.entry.Key.GetHashCode())
+                {
+                    temp = temp.left;
+                }
+                else
+                {
+                    temp = temp.right;
+                }
+            }
+            return null;
+        }
+        public TreeNode Successor()
+        {
+            if (root.right == null)
+            {
+                return null;
+            }
+            TreeNode temp = root.right;
+            TreeNode successor = MinNode(temp);
+            return successor;
+        }
+        public TreeNode Successor(TreeNode node)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+            TreeNode temp = node.right;
+            TreeNode successor = MinNode(node.right);
+            return successor;
+        }
+        public TreeNode Predecessor()
+        {
+            if (root.left == null)
+            {
+                return null;
+            }
+            TreeNode temp = root.left;
+            TreeNode predecessor = MaxNode(temp);
+            return predecessor;
+        }
+        public TreeNode Predecessor(TreeNode node)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+            TreeNode temp = node.left;
+            TreeNode predecessor = MaxNode(node.right);
+            return predecessor;
+        }
+        public TreeNode MaxNode()
+        {
+            if (root == null)
+            {
+                return null;
+            }
+            TreeNode temp = root;
+            while (temp.right != null)
+            {
+                temp = temp.right;
+            }
+            return temp;
+        }
+        public TreeNode MaxNode(TreeNode node)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+            TreeNode temp = node;
+            while(temp.right != null)
+            {
+                temp = temp.right;
+            }
+            return temp;
+        }
+        public TreeNode MinNode()
+        {
+            if (root == null)
+            {
+                return null;
+            }
+            TreeNode temp = root;
+            while(temp.left != null)
+            {
+                temp = temp.left;
+            }
+            return temp;
+        }
+        public TreeNode MinNode(TreeNode node)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+            TreeNode temp = node;
+            while (temp.left != null)
+            {
+                temp = temp.left;
+            }
+            return temp;
+        }
         public Queue Inorder()
         {
             Queue queue = new Queue();
@@ -134,5 +251,6 @@ namespace BinarySearchTreeExample
             queue.Enqueue(node.entry);
             Outorder(node.left, queue);
         }
+
     }
 }
