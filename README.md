@@ -7,5 +7,6 @@ NOTE: Some portions of the code stored in this repo are derived from the followi
 
 "Pro C# 7 with .NET and .NET Core" by Andrew Troelsen and Philip Japikse, published by Apress, copyright 2017, preserving certain rights to the publisher. For detailed information about source code published in this book, see www.apress.com/source-code, or the book's GitHub product page www.apress.com/9781484230176
 
-"Essential Algorithms" by Rod Stephens, puiblished by Wiley, copyright 2013, and the publisher hold rights to the material and its reproduction. Although the book contains primarily pseudo-code of algorithms that are known and regularly utilized in software development, my intention is to preserve my work while thumbing through the text, not to reproduce nor redistribute in any way.
+"Essential Algorithms" by Rod Stephens, published by Wiley, copyright 2013, and the publisher hold rights to the material and its reproduction. Although the book contains primarily pseudo-code of algorithms that are known and regularly utilized in software development, my intention is to preserve my work while thumbing through the text, not to reproduce nor redistribute in any way.
 
+"Microsoft ADO.NET 4 Step By Step" by Tim Patrick, published by O'Reilly Media, Inc., Copyright 2010 Tim Patrick. Code used in my repository utilizes lessons learned from this publication. Published code that appears in this repository is gleaned from this publication as part of an educational endeavor.
