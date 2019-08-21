@@ -18,14 +18,15 @@ namespace TwoSum
             // return [0, 1].
             int[] result;
             //int[] set = new int[4] { 2, 7, 11, 15 };
-            int[] set = new int[6] { 0, 2, 4, 6, 8, 9 };
-            //int[] set = new int[5] { 0, 1, 2, 3, 0 };
-            int target = 9;
+            //int[] set = new int[6] { 0, 2, 4, 6, 8, 9 };
+            int[] set = new int[5] { 0, 1, 2, 3, 0 };
+            int target = 6;
+            Console.WriteLine($"Target sum: {target}");
             Console.Write("Starting array: ");
             PrintValues(set);
 
             result = TwoSum(set, target);
-            Console.Write("\nResulting indices: ");
+            Console.Write("\nSelected Indices: ");
             PrintValues(result);
 
             Console.Write("\nPress <Enter> to Exit. . .");
@@ -33,37 +34,26 @@ namespace TwoSum
         }
         static int[] TwoSum(int[] nums, int target)
         {
-            // plan
-            // 1. Remove all numbers that are greater than target
-            // 2. Find an index with value equal to target and return it if exists
-            // 3. Subtract an index value from target. If an index value is equal to the difference return both *index* ints
-
-            int[] result = new int[2] {0,0};
-
-            // use a List to store the valid index ints
-            List<int> myList = new List<int>(nums.Length);
-            foreach (int i in nums)
+            int[] result = new int[2] { 0, 0 };
+            for (int x = nums.Length - 1; x >= 0; x--)
             {
-                    // store a valid index int
-                    myList.Add(i);
-            }
-
-            // do difference check to get two valid indices
-            for (int x = myList.Count-1; x >= 0; x--)
-            {
-                for (int y = myList.Count-1; y >= 0 ; y--)
+                for (int y = nums.Length - 1; y >= 0; y--)
                 {
-                    if (x!=y && target - nums[x] == nums[y])
+                    if (x != y && target - nums[x] == nums[y])
                     {
-                        // return the two VALUES as an int[] (use the discovered indices to select them)
-                        //return new int[2] { x, y };
                         result[0] = x;
                         result[1] = y;
                     }
                 }
             }
-            //throw new NotImplementedException();
-            return result;
+            if (result[0] == result[1] && result[1] == 0)
+            {
+                return new int[2] { -1, -1 };
+            }
+            else
+            {
+                return result;
+            }
         }
         static void PrintValues(int[] arr)
         {
