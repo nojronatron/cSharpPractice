@@ -16,12 +16,12 @@ namespace DataProviderFactory_Example
         {
             // obtain the specific DbProviderFacotry object of the speicified darta provider by
             //  specifying a string name that represents the .NET namespace containing the provider's functionality
-            DbProviderFactory sqlFactory = DbProviderFactories.GetFactory("System.Data.SqlClient");
+            // e.g.: DbProviderFactory sqlFactory = DbProviderFactories.GetFactory("System.Data.SqlClient");
 
             WriteLine("***** Fun with Data Provider Factories *****\n");
             // Get connection string/provider from *.config
             string dataProvider = ConfigurationManager.AppSettings["provider"];
-            string connectionString = ConfigurationManager.AppSettings["connectionString"];
+            string connectionString = ConfigurationManager.ConnectionStrings["AutoLotSqlProvider"].ConnectionString;
 
             // Get the factory provider
             DbProviderFactory factory = DbProviderFactories.GetFactory(dataProvider);
@@ -31,7 +31,7 @@ namespace DataProviderFactory_Example
             {
                 if (connection == null)
                 {
-                    ShowError("Connection");
+                    ShowError("Connection"); // pg.828
                     return;
                 }
                 WriteLine($"Your connection object is a: {connection.GetType().Name}");

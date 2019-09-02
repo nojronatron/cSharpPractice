@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using AutoLotDAL.Models;
+using static System.Console;
 
 namespace AutoLotDAL.DataOperations
 {
@@ -103,8 +103,8 @@ namespace AutoLotDAL.DataOperations
             string sql = "Insert Into Inventory " +
                          "(Make, Color, PetName) Values " +
                          "(@Make, @Color, @PetName)"; // safer way using internal Parameters 
-                         // vulnerable way: $"('{car.Make}','{car.Color}','{car.PetName}')";
-            // execute using our connection - now with super Params
+                                                      // vulnerable way: $"('{car.Make}','{car.Color}','{car.PetName}')";
+                                                      // execute using our connection - now with super Params
             using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
             {
                 SqlParameter parameter = new SqlParameter
@@ -199,7 +199,7 @@ namespace AutoLotDAL.DataOperations
                 {
                     ParameterName = "@petName",
                     SqlDbType = SqlDbType.Char,
-                    Size=10,
+                    Size = 10,
                     Direction = ParameterDirection.Output
                 };
                 command.Parameters.Add(param);
@@ -213,6 +213,85 @@ namespace AutoLotDAL.DataOperations
                 CloseConnection();
             }
             return carPetName;
+        }
+        public void ProcessCreditRisk(bool throwEx, int custId)
+        {
+            OpenConnection();
+            // first look up current name based on customer ID
+            string fName = "";
+            string lName = "";
+            string sqlCommandText =
+                $"SELECT * FROM [Customers] WHERE [CustID] = {custId}";
+            // $"SELECT [CustID],[FirstName],[LastName] FROM[dbo].[Customers] WHERE[CustID] = {custId}";
+            var cmdSelect = new SqlCommand(sqlCommandText, _sqlConnection);
+            //var cmdSelect = new SqlCommand($"Select * from Customers where CustId = {custId}", _sqlConnection);
+            using (var dataReader = cmdSelect.ExecuteReader())
+            {
+                if (dataReader.HasRows)
+                {
+                    try
+                    {   // added try/catch due to session collision issues
+                        // if no other sessions exist from this exe then dataReader will have data
+                        // if other sessions exist from this exe then dataReader comes back empty
+                        // go to ssms to fix dead session(s) from visual studio/InventoryDAL to preempt issues
+                        dataReader.Read();
+                        fName = (string)dataReader["FirstName"];
+                        lName = (string)dataReader["LastName"];
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteLine($"Something went wrong:\n{ex}\n\nClosing Connection...");
+                        CloseConnection();
+                    }
+                }
+                else
+                {
+                    CloseConnection();
+                    return;
+                }
+            }
+
+            // create comand objects that represent each step of the operation
+            var cmdRemove = new SqlCommand(
+                $"Delete from Customers where CustId = {custId}", _sqlConnection);
+            var cmdInsert = new SqlCommand(
+                $"Insert into CreditRisks table (FirstName, LastName) Values('{fName}', '{lName}')", _sqlConnection);
+
+            // get this from the connection object
+            SqlTransaction tx = null;
+            try
+            {
+                tx = _sqlConnection.BeginTransaction();
+
+                // enlist the commands into this transaction
+                cmdInsert.Transaction = tx;
+                cmdRemove.Transaction = tx;
+
+                // execute the commands
+                cmdInsert.ExecuteNonQuery();
+                cmdRemove.ExecuteNonQuery();
+
+                // simulate error
+                if (throwEx)
+                {
+                    throw new Exception("Sorry! DB error; TX failed. . .");
+                }
+
+                // commit it
+                tx.Commit();
+            }
+            catch (Exception ex)
+            {
+                // WriteLine("\nEntered catch block via throwEx=true logic....");
+                WriteLine(ex.Message);
+                // any error will roll back transaction
+                // use the new conditional access operator to check for null
+                tx?.Rollback();
+            }
+            finally
+            {
+                CloseConnection();
+            }
         }
     }
 }

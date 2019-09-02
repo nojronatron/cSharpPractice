@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using AutoLotDAL.DataOperations;
 using AutoLotDAL.Models;
 using System.Linq;
+using AutoLotDAL.BulkImport;
 
 namespace AutoLotClient
 {
@@ -46,16 +47,65 @@ namespace AutoLotClient
             list = dal.GetAllInventory();
             DisplayCars(list);
 
-            WriteLine("Press <Enter> to Continue. . .");
+            // WriteLine("\n*** Move Customer Example Using Transactions ***");
+            // MoveCustomer();
+
+            // DoBulkCopy example
+            DoBulkCopy();
+
+            WriteLine("\n\nPress <Enter> to Continue. . .");
             ReadLine();
         }
-        static void DisplayCars(List<Car> listOfCars)
+        public static void DoBulkCopy()
+        {
+            WriteLine("******* Do Bulk Copy *******");
+            var cars = new List<Car>
+            {
+                new Car() { Color = "Blue", Make = "Honda", PetName = "BulkCar1"},
+                new Car() { Color = "Red", Make = "Subaru", PetName = "BulkCar2"},
+                new Car() { Color="White", Make="VW", PetName="BulkCar3"},
+                new Car() { Color = "Yellow", Make="Toyota", PetName = "BlukCar4"}
+            };
+
+            ProcessBulkImport.ExecuteBulkImport(cars, "Inventory");
+            Console.WriteLine("Bulk copy completed.");
+            InventoryDAL dal = new InventoryDAL();
+            var list = dal.GetAllInventory();
+            Console.WriteLine(" ************** Display All Cars ************** ");
+            Console.WriteLine("CarId\tMake\tColor\tPet Name");
+            foreach (var item in list)
+            {
+                Console.WriteLine($"{item.CarId}\t{item.Make}\t{item.Color}\t{item.PetName}");
+            }
+            WriteLine();
+        }
+        public static void DisplayCars(List<Car> listOfCars)
         {
             WriteLine("CarId\tMake\tColor\tPet Name");
             foreach (Car c in listOfCars)
             {
                 WriteLine($"{c.CarId}\t{c.Make}\t{c.Color}\t{c.PetName}");
             }
+        }
+        public static void MoveCustomer()
+        {
+            WriteLine("*** Simple Transation Example ***");
+
+            // a simple way to allow the tx to succeed or not
+            bool throwEx = false;
+
+            Write("Do you want to throw an exception (y or n): ");
+            var userAnswer = ReadLine();
+            if (userAnswer?.ToLower() == "y")
+            {
+                throwEx = true;
+            }
+
+            var dal = new InventoryDAL();
+            // process customer 1 - enter the id for the customer to move
+            dal.ProcessCreditRisk(throwEx, 1);
+            WriteLine("Check CreditRisk table for results.");
+            ReadLine();
         }
     }
 }

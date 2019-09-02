@@ -1,0 +1,33 @@
+method
+inheritance
+class
+object
+instance
+property
+field
+constructor
+dot net
+array
+main
+curly brace
+string
+boolean
+semicolon
+parse
+try catch
+partial
+return
+call
+override
+keyword
+get or set
+static
+interface
+base
+virtual
+object
+abstract
+tryparse
+encapsulation
+ADO.NET
+Entity Framework
