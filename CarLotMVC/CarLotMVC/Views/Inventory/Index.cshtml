@@ -1,10 +1,6 @@
 ﻿@model IEnumerable<AutoLotDAL.Models.Inventory>
 
 @using AutoLotDAL.Models
-@*@helper ShowInventory(Inventory item)
-    {
-    @item.Make<text>-</text>@item.Color<text>(</text>@item.PetName<text>)</text>
-    }*@
 
 @functions
 {
@@ -15,10 +11,6 @@
     }
 }
 
-@*@{ 
-    Func<dynamic, object> b = @<strong>@item</strong>;
-}
-Using a Razor Delegate, this will be bold: @b("Foo")*@
 
 @{
     ViewBag.Title = "Index";
@@ -41,33 +33,12 @@ Using a Razor Delegate, this will be bold: @b("Foo")*@
             @Html.DisplayNameFor(model => model.PetName)
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.Timestamp)*@
         </th>
     </tr>
 
     @foreach (var item in SortCars(Model.ToList()))
     {
-        @*@ShowInventory(item)*@
         @Html.DisplayFor(modelItem=>item,"InventoryList")
-        @*<tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Make)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Timestamp)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>*@
     }
 
 </table>
