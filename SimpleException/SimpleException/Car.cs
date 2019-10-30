@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleException
 {
@@ -52,7 +48,15 @@ namespace SimpleException
                     carIsDead = true;
 
                     //  use the throw keyword to raise an exception
-                    throw new Exception($"{PetName} has overheated!");  //   the executable will write the exception text to the default output/console
+                    //throw new Exception($"{PetName} has overheated!");  //   the executable will write the exception text to the default output/console
+
+                    //  define the HelpLink
+                    Exception ex = new Exception($"{PetName} has overheated!");
+                    ex.HelpLink = "http://www.google.com";
+                    //  custom data re: the error
+                    ex.Data.Add("Timestamp", $"The car exploded at {DateTime.Now}");
+                    ex.Data.Add("Cause", "You have a lead foot.");
+                    throw ex;
                 }
                 else
                 {

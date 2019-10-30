@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
 
 namespace SimpleException
 {
@@ -28,8 +25,17 @@ namespace SimpleException
             {
                 Console.WriteLine("\n*** Error! ***");
                 Console.WriteLine($"Method: {ex.TargetSite}");
+                Console.WriteLine($"Class defining member: {ex.TargetSite.DeclaringType}");
+                Console.WriteLine($"Member type: {ex.TargetSite.MemberType}");
                 Console.WriteLine($"Message: {ex.Message}");
                 Console.WriteLine($"Source: {ex.Source}");
+                Console.WriteLine($"Stack: {ex.StackTrace}");
+
+                Console.WriteLine("\n=> Custom Data");
+                foreach (DictionaryEntry de in ex.Data)
+                {
+                    Console.WriteLine($"=> {de.Key}, {de.Value}");
+                }
             }   //  The error has been handled, processing continues with the next statements...
             Console.WriteLine("\n***** Out of exception logic *****");
             Console.ReadLine();
