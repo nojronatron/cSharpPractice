@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarDelegateMethodGroupConversion", "CarDelegateMethodGroupConversion\CarDelegateMethodGroupConversion.csproj", "{7F0A61C5-1142-4A09-9FC1-6002F033945D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F0A61C5-1142-4A09-9FC1-6002F033945D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F0A61C5-1142-4A09-9FC1-6002F033945D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F0A61C5-1142-4A09-9FC1-6002F033945D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F0A61C5-1142-4A09-9FC1-6002F033945D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD81C067-039B-45DC-A9D7-0C8BEB07CCD8}
+	EndGlobalSection
+EndGlobal
