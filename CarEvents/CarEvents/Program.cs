@@ -50,17 +50,33 @@ namespace CarEvents
             Console.ReadLine();
         }
         //  create static methods for the caller
-        public static void CarAboutToBlow(string msg)
+        public static void CarAboutToBlow(object sender, CarEventArgs e)
+        //public static void CarAboutToBlow(string msg)
         {
-            Console.WriteLine(msg);
+            //  updated to support Custom Event Arguments
+            if (sender is Car c)
+            {
+                Console.WriteLine($"Critical Message from { c.PetName }: { e.msg }.");
+            }
+            //Console.WriteLine(msg);
         }
-        public static void CarIsAlmostDoomed(string msg)
+        public static void CarIsAlmostDoomed(object sender, CarEventArgs e)
+        //public static void CarIsAlmostDoomed(string msg)
         {
-            Console.WriteLine(msg);
+            if (sender is Car c)
+            {
+                Console.WriteLine($"Warning Message from { c.PetName }: { e.msg }.");
+            }
+            //Console.WriteLine(msg);
         }
-        public static void CarExploded(string msg)
+        public static void CarExploded(object sender, CarEventArgs e)
+        //public static void CarExploded(string msg)
         {
-            Console.WriteLine(msg);
+            if (sender is Car c)
+            {
+                Console.WriteLine($"Error Message from { c.PetName }: { e.msg }.");
+            }
+            //Console.WriteLine(msg);
         }
     }
 }

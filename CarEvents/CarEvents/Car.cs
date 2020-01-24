@@ -9,7 +9,8 @@ namespace CarEvents
     public class Car
     {
         //  this Delegate works in conjunction with the Car's events
-        public delegate void CarEngineHandler(string msg);
+        //public delegate void CarEngineHandler(string msg);    //  commented out for leveraging CarEventArgs class
+        public delegate void CarEngineHandler(object sender, CarEventArgs e);
 
         //  this car can send these events
         public event CarEngineHandler Exploded;
@@ -37,12 +38,14 @@ namespace CarEvents
             if (carIsDead)
             {
                 //  if this car is dead send dead message
-                Exploded?.Invoke("Sorry, this car is dead.");
+                //Exploded?.Invoke("Sorry, this car is dead."); //  use Custom Event Args instead
+                Exploded?.Invoke(this, new CarEventArgs("Sorry, this car is dead..."));
             }
             //  is this car almost dead
             else if (10 == MaxSpeed - CurrentSpeed)
             {
-                AboutToBlow?.Invoke("Careful buddy! Gonna blow!");
+                //AboutToBlow?.Invoke("Careful buddy! Gonna blow!");    //  use Custom Event Args instead
+                AboutToBlow?.Invoke(this, new CarEventArgs("Careful buddy! Gonna blow!"));
             }
             else if (CurrentSpeed >= MaxSpeed)
             {
