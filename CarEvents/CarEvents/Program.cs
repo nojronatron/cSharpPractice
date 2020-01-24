@@ -13,12 +13,12 @@ namespace CarEvents
             Console.WriteLine("***** Fun with Events *****");
             Car myCar = new Car("Ted", 100, 10);
 
-            //  register event handlers (method) with the instance's public event by using +=
-            myCar.AboutToBlow += new Car.CarEngineHandler(CarIsAlmostDoomed);
-            myCar.AboutToBlow += new Car.CarEngineHandler(CarAboutToBlow);
+            //  register event handlers
+            myCar.AboutToBlow += CarIsAlmostDoomed;
+            myCar.AboutToBlow += CarAboutToBlow;
 
             //  attach/register with an event with +=
-            Car.CarEngineHandler dead = new Car.CarEngineHandler(CarExploded);  //  the delegate 'CarEngineHandler'
+            EventHandler<CarEventArgs> dead = new EventHandler<CarEventArgs>(CarExploded);
             myCar.Exploded += dead; //  registering CarEngineHandler 'dead' with the event
 
             Console.WriteLine("***** Speeding up *****");
@@ -51,32 +51,26 @@ namespace CarEvents
         }
         //  create static methods for the caller
         public static void CarAboutToBlow(object sender, CarEventArgs e)
-        //public static void CarAboutToBlow(string msg)
         {
             //  updated to support Custom Event Arguments
             if (sender is Car c)
             {
                 Console.WriteLine($"Critical Message from { c.PetName }: { e.msg }.");
             }
-            //Console.WriteLine(msg);
         }
         public static void CarIsAlmostDoomed(object sender, CarEventArgs e)
-        //public static void CarIsAlmostDoomed(string msg)
         {
             if (sender is Car c)
             {
                 Console.WriteLine($"Warning Message from { c.PetName }: { e.msg }.");
             }
-            //Console.WriteLine(msg);
         }
         public static void CarExploded(object sender, CarEventArgs e)
-        //public static void CarExploded(string msg)
         {
             if (sender is Car c)
             {
                 Console.WriteLine($"Error Message from { c.PetName }: { e.msg }.");
             }
-            //Console.WriteLine(msg);
         }
     }
 }
