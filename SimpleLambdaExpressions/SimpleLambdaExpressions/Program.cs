@@ -35,7 +35,9 @@ namespace SimpleLambdaExpressions
             List<int> list = new List<int>();
             list.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
 
-            //  use a C# lambda expression
+            //  use a C# lambda expression as (parameter list) => statement to process arguments;
+            //      and: (parameter list) => { statementS to process arguments };
+            //      and: () => statement to process;
             List<int> evenNumbers = list.FindAll(i => (i % 2) == 0);
 
             Console.WriteLine("Here are your event numbers:");
