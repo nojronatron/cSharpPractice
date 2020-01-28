@@ -26,11 +26,12 @@ namespace SimpleLambdaExpressions
 
 
 
-            Console.Write("Press <Enter> to Exit. . .");
+            Console.Write("\n\nPress <Enter> to Exit. . .");
             Console.ReadLine();
         }
         static void LambdaExpressionSyntax()
         {
+            Console.WriteLine("\n*** Lambda Expression Results ***");
             //  make a list of integers
             List<int> list = new List<int>();
             list.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
@@ -38,17 +39,23 @@ namespace SimpleLambdaExpressions
             //  use a C# lambda expression as (parameter list) => statement to process arguments;
             //      and: (parameter list) => { statementS to process arguments };
             //      and: () => statement to process;
-            List<int> evenNumbers = list.FindAll(i => (i % 2) == 0);
+            List<int> evenNumbers = list.FindAll(i =>
+            {
+                Console.WriteLine($"The current value of i is { i }.");
+                bool isEven = ((i % 2) == 0);
+                return isEven;
+            });
 
-            Console.WriteLine("Here are your event numbers:");
+            Console.WriteLine("Here are your even numbers:");
             foreach (int evenNumber in evenNumbers)
             {
-                Console.WriteLine($"{ evenNumber }\t");
+                Console.Write($"{ evenNumber }\t");
             }
             Console.WriteLine();
         }
         static void AnonymousMethodSyntax()
         {
+            Console.WriteLine("\n*** Anonymous Method Results ***");
             //  make a list of integers
             List<int> list = new List<int>();
             list.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
@@ -59,15 +66,16 @@ namespace SimpleLambdaExpressions
                 return (i % 2 == 0);
             });
 
-            Console.WriteLine("Here are your event numbers:");
+            Console.WriteLine("Here are your even numbers:");
             foreach (int evenNumber in evenNumbers)
             {
-                Console.WriteLine($"{ evenNumber }\t");
+                Console.Write($"{ evenNumber }\t");
             }
             Console.WriteLine();
         }
         static void TraditionalDelegateSyntax()
         {
+            Console.WriteLine("\n*** Traditional Delegate Results ***");
             //  make a list of integers
             List<int> list = new List<int>();
             list.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
@@ -76,10 +84,10 @@ namespace SimpleLambdaExpressions
             Predicate<int> callback = IsEvenNumber;
             List<int> evenNumbers = list.FindAll(callback);
 
-            Console.WriteLine("Here are your event numbers:");
+            Console.WriteLine("Here are your even numbers:");
             foreach (int evenNumber in evenNumbers)
             {
-                Console.WriteLine($"{ evenNumber }\t");
+                Console.Write($"{ evenNumber }\t");
             }
             Console.WriteLine();
         }
