@@ -21,11 +21,31 @@ namespace SimpleLambdaExpressions
 
             Console.WriteLine("***** Fun with Lambdas *****\n");
             TraditionalDelegateSyntax();
+            AnonymousMethodSyntax();
 
 
 
             Console.Write("Press <Enter> to Exit. . .");
             Console.ReadLine();
+        }
+        static void AnonymousMethodSyntax()
+        {
+            //  make a list of integers
+            List<int> list = new List<int>();
+            list.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
+
+            //  use an anonymous method
+            List<int> evenNumbers = list.FindAll(delegate (int i)
+            {
+                return (i % 2 == 0);
+            });
+
+            Console.WriteLine("Here are your event numbers:");
+            foreach (int evenNumber in evenNumbers)
+            {
+                Console.WriteLine($"{ evenNumber }\t");
+            }
+            Console.WriteLine();
         }
         static void TraditionalDelegateSyntax()
         {
