@@ -22,11 +22,28 @@ namespace SimpleLambdaExpressions
             Console.WriteLine("***** Fun with Lambdas *****\n");
             TraditionalDelegateSyntax();
             AnonymousMethodSyntax();
+            LambdaExpressionSyntax();
 
 
 
             Console.Write("Press <Enter> to Exit. . .");
             Console.ReadLine();
+        }
+        static void LambdaExpressionSyntax()
+        {
+            //  make a list of integers
+            List<int> list = new List<int>();
+            list.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
+
+            //  use a C# lambda expression
+            List<int> evenNumbers = list.FindAll(i => (i % 2) == 0);
+
+            Console.WriteLine("Here are your event numbers:");
+            foreach (int evenNumber in evenNumbers)
+            {
+                Console.WriteLine($"{ evenNumber }\t");
+            }
+            Console.WriteLine();
         }
         static void AnonymousMethodSyntax()
         {
