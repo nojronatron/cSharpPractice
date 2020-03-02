@@ -41,26 +41,64 @@ namespace EgyptianFractions
 
         Ref: http://en.wikipedia.org/wiki/Egyptian_fraction
         */
+
         public static string Decompose(string nrStr, string drStr)
         {
-            StringBuilder results = new StringBuilder();
             if (nrStr != string.Empty && drStr != string.Empty && nrStr != "0")
             {
-                if (decimal.TryParse(nrStr, out decimal numerator))
+                StringBuilder results = new StringBuilder();
+                if (double.TryParse(nrStr, out double numerator))
                 {
-                    if (decimal.TryParse(drStr, out decimal denominator))
+                    if (double.TryParse(drStr, out double denominator))
                     {
+                        //  fraction IS a whole number
+                        if (numerator == denominator)
+                        {
+                            return $"[1]";
+                        }
+                        //  more calculations necessary at this point
+                        results.Append("[");
+                        Queue<double> denominators = new Queue<double>();
+
+                        //  reduce the remaining fraction
+                        double gcd = GetGCD(numerator, denominator);
+                        numerator = numerator / gcd;
+                        denominator = denominator / gcd;
+
+                        //  mixed fraction
                         if (numerator > denominator)
                         {
-                            decimal mixed = numerator / denominator;
-                            return $"[{ mixed.ToString() }]";
+                            double wholeNumber = Math.Truncate(numerator / denominator);
+                            //  append the whole number to the results (implied n/1)
+                            results.Append($"{ wholeNumber.ToString() }");
+                            //  subtract the whole number from the mixed fraction
+                            numerator -= (denominator * wholeNumber);
+                            if (numerator == 0)
+                            {
+                                results.Append($"]");
+                                return results.ToString();
+                            }
+                            else
+                            {
+                                results.Append($", ");
+                            };
                         }
-                        Queue<decimal> denominators = new Queue<decimal>();
-                        GreedyAlgo(numerator, denominator, denominators);
-                        results.Append("[");
-                        while(denominators.Count > 0)
+                        //  just append 1/n remaining simplified fraction to results and finish
+                        if (numerator == 1 && denominator > 1)
                         {
-                            decimal thisDenominator = denominators.Dequeue();
+                            results.Append($"{ numerator.ToString() }/{ denominator.ToString() }]");
+                            return results.ToString();  //  try to break out completely here
+                        }
+                        //  use GreedyAlgo to find next 1/m fraction(s)
+                        else if (numerator > 1 && denominator > 1)
+                        {
+                            GreedyAlgo(numerator, denominator, denominators);
+                        }
+
+                        while (denominators.Count > 0)
+                        {
+                            double thisDenominator = denominators.Dequeue();
+                            string toAppend = string.Empty;
                             results.Append($"1/{ thisDenominator }");
                             if (denominators.Count != 0)
                             {
@@ -74,11 +112,33 @@ namespace EgyptianFractions
             }
             return "[]";
         }
-        public static Queue<decimal> GreedyAlgo(decimal x, decimal y, Queue<decimal> ExpandedDenominators)
+        
+        public static double GetGCD(double numer, double denomin)
         {
-            decimal expandedDenominator = Math.Floor(y / x) + 1;
+            //  Euclidean method to find GCD
+            long a = long.Parse(numer.ToString());
+            long b = long.Parse(denomin.ToString());
+            double gcd = 0;
+            // Pull out remainders.
+            while (true)
+            {
+                long remainder = a % b;
+                if (remainder == 0)
+                {
+                    gcd = b;
+                    break;
+                }
+                a = b;
+                b = remainder;
+            }
+            return gcd;
+        }
+
+        public static Queue<double> GreedyAlgo(double x, double y, Queue<double> ExpandedDenominators)
+        {
+            double expandedDenominator = Math.Floor(y / x) + 1;
             ExpandedDenominators.Enqueue(expandedDenominator);
-            decimal remainderNumerator = Difference(x, y, 1, expandedDenominator, out decimal remainderDenominator);
+            double remainderNumerator = Difference(x, y, 1, expandedDenominator, out double remainderDenominator);
             if (remainderNumerator > 1)
             {
                 GreedyAlgo(remainderNumerator, remainderDenominator, ExpandedDenominators);
@@ -90,12 +150,12 @@ namespace EgyptianFractions
             return ExpandedDenominators;
         }
 
-        public static decimal Difference(decimal x, decimal y, decimal x2, decimal y2, out decimal denominator)
+        public static double Difference(double x, double y, double x2, double y2, out double denominator)
         {
-            decimal productDenominator = y * y2;
-            decimal newFirstNumerator = x * y2;
-            decimal newSecondNumerator = x2 * y;
-            decimal differenceNumerator;
+            double productDenominator = y * y2;
+            double newFirstNumerator = x * y2;
+            double newSecondNumerator = x2 * y;
+            double differenceNumerator;
             if (x > x2)
             {
                 differenceNumerator = newFirstNumerator - newSecondNumerator;

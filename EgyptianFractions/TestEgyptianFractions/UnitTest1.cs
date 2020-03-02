@@ -44,35 +44,6 @@ namespace TestEgyptianFractions
         }
 
         [TestMethod]
-        public void Test_ReducedFractions_Alpha()
-        {
-            Assert.AreEqual("[1/2, 1/4]", Decomp.Decompose("3", "4"));
-        }
-
-        [TestMethod]
-        public void Test_ReducedFractions_Bravo()
-        {
-            Assert.AreEqual("[3]", Decomp.Decompose("12", "4"));
-        }
-
-        [TestMethod]
-        public void Test_ReducedFractions_Charlie()
-        {
-            Assert.AreEqual("[]", Decomp.Decompose("0", "2"));
-        }
-
-        [TestMethod]
-        public void Test_ReducedFractions_Delta()
-        {
-            Assert.AreEqual("[1/2, 1/3, 1/15]", Decomp.Decompose("9", "10"));
-        }
-
-        [TestMethod()]
-        public void Test_ReducedFractions_Echo()
-        {
-            Assert.AreEqual("[1/2, 1/3, 1/13, 1/359, 1/644046]", Decomp.Decompose("21", "23"));
-        }
-        [TestMethod]
         public void Test_FractionSplitter_Alpha()
         {
             string expectedResult = "2/11, 6/11";
