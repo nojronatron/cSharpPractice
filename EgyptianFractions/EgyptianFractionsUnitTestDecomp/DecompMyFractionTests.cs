@@ -14,6 +14,13 @@ namespace EgyptianFractions.Tests
     [TestClass()]
     public class DecompMyFractionTests
     {
+        [TestMethod()]
+        public void Test_EightTwelfths()
+        {
+            string result = Decomp.Decompose("8", "13");
+            Console.WriteLine($"8/13ths: { result }");
+            Assert.AreEqual("[1/2, 1/9, 1/234]", result.ToString());
+        }
         [TestMethod]
         public void Test_Decomp_Greedy()
         {
