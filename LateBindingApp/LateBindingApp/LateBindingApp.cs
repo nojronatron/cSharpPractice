@@ -26,6 +26,7 @@ namespace LateBindingApp
             if(a != null)
             {
                 CreateUsingLateBinding(a);
+                InvokeMethodWithArgsUsingLateBinding(a);
             }
             Console.ReadLine();
         }
@@ -47,6 +48,25 @@ namespace LateBindingApp
                 mi.Invoke(obj, null);
             }
             catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        static void InvokeMethodWithArgsUsingLateBinding(Assembly asm)
+        {
+            try
+            {
+                //  first get a metadata description of the sports car
+                Type sport = asm.GetType("CarLibrary.SportsCar");
+
+                //  now create the sports car
+                object obj = Activator.CreateInstance(sport);
+
+                //  invoke TurnOnRadio() with arguments
+                MethodInfo mi = sport.GetMethod("TurnOnRadio");
+                mi.Invoke(obj, new object[] { true, 2 });
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
