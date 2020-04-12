@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Linq;
 
@@ -22,7 +19,7 @@ namespace ImportPlainTextFileToXML
             // get filename and path
             Console.WriteLine("Enter the path and filename to the plain-text file: ");
             string fullFileName = Console.ReadLine();
-            // e.g.: C:\Users\Blue\source\repos\nojronatron\cSharpPractice\ImportPlainTextFileToXML\cSharpLingo.txt
+            // e.g.: C:\Users\name\Desktop\cSharpLingo.txt
 
             try
             {   // catch Exceptions to avoid having to test for lots of things
@@ -31,8 +28,7 @@ namespace ImportPlainTextFileToXML
                 string srcFileName = fi.Name;
                 string srcFileExt = fi.Extension;
                 if (fi.Exists)
-                {
-                    // get Category
+                {   // get Category
                     string category = fi.Name.ToString();
                     category = category.Replace(".txt", "");    // remove extention
                     int lingoStart = category.ToLower().IndexOf("lingo"); // get index of word lingo
@@ -55,13 +51,13 @@ namespace ImportPlainTextFileToXML
                             lingoWordList.Add(lw);
                         }
                     }
-                    // generate Xml Document
 
+                    // generate Xml Document
                     XDocument xDocInitXmlFile = new XDocument()
                     {
                         Declaration = new XDeclaration("1.0", "utf-8", "yes")
                     };
-                    xDocInitXmlFile.Add(new XComment("Custom Lingo Words per user plain text input"));
+                    xDocInitXmlFile.Add(new XComment("Custom Lingo Words per users plain text input"));
                     XElement elWords = new XElement("Words");
                     xDocInitXmlFile.Add(elWords);
                     foreach (LingoWord item in lingoWordList)
