@@ -45,7 +45,7 @@ namespace AsyncCallbackDelegate
             Console.WriteLine($"AddComplete() invoked on this thread { Thread.CurrentThread.ManagedThreadId }.");
             Console.WriteLine("Addition operation complete!");
             IsDone = true;
-            Console.WriteLine($"iar.AsyncState.ToString() called: { iar.AsyncState.ToString() }");
+            Console.WriteLine( iar.AsyncState.ToString() );
         }
     }
 }
